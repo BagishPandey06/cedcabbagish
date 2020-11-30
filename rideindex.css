@@ -1,0 +1,108 @@
+
+
+
+
+
+
+
+
+
+.img{
+    height: 690px;
+    background-image: url(ride.jpg);
+    background-repeat:no-repeat;
+    background-size:100% 100%;
+    background-position: center;
+    
+    
+  }
+  .ced,.coss{
+    font-size: larger;
+    text-shadow: 2px 2px #067df33f;
+  }
+  .a{
+    background-color: honeydew;
+    border-radius: 5px;
+  }
+  .b{
+    background-color: greenyellow;
+    font-weight: bolder;
+    font-size: 13px;
+    border-radius: 10px;
+    
+  }
+  .head{
+    color: rgb(0, 0, 0);
+    font-weight: bolder;
+    text-shadow: 5px 5px #26fc6d3f;
+  }
+  .c{
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  .d{
+    font-size: 16px;
+  }
+  .form-control{
+    background-color: #e9ecef;
+    -webkit-appearance: none;
+   
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  }
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+  .form-control:focus{
+    box-shadow: none;
+    outline: none;
+  }
+  .input-group-text{
+    font-size: 10px;
+    width: 75px;
+  }
+  .btn{
+    background-color: greenyellow;
+  }
+  .ced{
+  color: rgb(2, 66, 61);
+  font-weight: bold;
+  }
+  .coss{
+    color: rgb(7, 129, 68);
+    font-weight: bold;
+  
+  }
+  .btn1{
+    background-color:yellowgreen ;
+  }
+  
+  @media only screen and (max-width:768px){
+    .on{
+        display: none;
+    }
+    
+  }
+  .res{
+    color: rgb(8, 156, 20);
+    font-weight: bolder;
+    text-shadow: 5px 5px #26fc6d3f;
+    font-size: larger;
+  }
+  #limg{
+    background-image: url(car.jpg);
+      width:70%;
+      height:450px;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background;
+    float:left;  
+  }
+  .foot{
+    margin-top: 400px;
+
+  }
