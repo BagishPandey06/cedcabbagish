@@ -200,7 +200,7 @@ require 'headeradmin.php';
                         </div>
                         <div class="form-group">
                           <label for="dsitance">Distance From Charbagh</label>
-                          <input type="number" class="form-control" style="width: 25rem;" id="distance">
+                          <input type="NUMBER" class="form-control" style="width: 25rem;" id="distance">
                         </div>
                         <div class="form-group">
                           <label for="avilabilty">service avilable</label>
@@ -218,6 +218,30 @@ require 'headeradmin.php';
   
   </section>
   <!-- end all users -->
+
+  <!-- change password form -->
+<section id="chngadminpass">
+<form action="" method="POST">
+                <p>
+                    <label for="old password">old Password:<br>
+                    <input type="password" name="pass" id="op"
+                    value=""required>
+                    </label>
+                </p>
+                <p>
+                    <label for="new password">New Password:<br>
+                        <input type="password" name="newpass" id="np"
+                        value="" required>
+                    </label>
+                </p>
+               
+                <p>
+                    <input type="button" name="submit" class="btn btn-warning" id="chngpass" value="SUBMIT">
+                </p>
+            </form>
+</section>
+<!-- end change password form -->
+ 
   
 <?php
 require 'footeradmin.php';

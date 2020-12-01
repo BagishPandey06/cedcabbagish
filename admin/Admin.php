@@ -252,5 +252,30 @@ class Admin
         }
 
     }
+    public function pass($newp, $old, $adminid, $data)
+    {   
+        $sql="SELECT * FROM user WHERE `userid`=$adminid";
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            while ($row=$res->fetch_assoc()) {
+                $oldp=$row['password'];
+            }
+            
+        }
+        
+        $olda=md5($old);
+        
+
+        if ($oldp==$olda) {
+            $newpa=md5($newp);
+            $sql="UPDATE user SET`password`='$newpa' WHERE `userid`=$adminid";
+            if ($res=$data->query($sql)==true) {
+                $out="inserted";
+            } else {
+                $out="sorrydfg"; 
+            }
+              return $out;
+        } 
+    }
 }
 ?>

@@ -11,7 +11,10 @@
 session_start();
 if (empty($_SESSION["admindata"])) {
     header('location:../login.php');
+} else {
+    $adminid=$_SESSION['admindata']['id'];
 }
+
 require '../Config.php';
 require 'Admin.php';
 $obj =new Config();
@@ -89,8 +92,8 @@ $out=$objj->fetchdata($data);
   <i class="fa fa-map-marker" style="font-size:20px;color:rgb(10, 10, 10);"></i> &nbsp;Location
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" id="location" >Location List</a>
-    <a class="dropdown-item" id="alocation">Add New Location</a>
+    <a class="dropdown-item" id="location" href="#">Location List</a>
+    <a class="dropdown-item" id="alocation" href="#">Add New Location</a>
   </div>
 </div>
 <div class="dropdown d-block mb-5 mt-5">
@@ -98,7 +101,7 @@ $out=$objj->fetchdata($data);
   <i class="fa fa-user-circle-o" style="font-size:20px;color:rgb(10, 10, 10);"></i> &nbsp;Account
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">Change Password</a>
+    <a class="dropdown-item" id="adminpass" href="#">Change Password</a>
   </div>
 </div>
 </div>

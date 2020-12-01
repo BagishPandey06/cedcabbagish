@@ -156,7 +156,7 @@ $(document).ready(function () {
             $("#all_ri").hide();
         html = '<h1 class="text-center">completed rides</h1><table class="table table-striped table-dark">\
         <tr><td>Ridedate</td><td>From</td><td>To</td><td>Distance</td><td>Luggage<small>(kg)</small></td>\
-        <td>Amount</td><td>Cab</td></tr>';
+        <td>Amount</td><td>Cab</td><td>Invoice print</td></tr>';
         var action = "compride";
         $.ajax({
             url: "deup.php",
@@ -171,13 +171,46 @@ $(document).ready(function () {
                     html +=  '<tr><td>' + result[i]['ridedate'] + '</td><td>' + result[i]['froml'] + '</td><td>' +
                     result[i]['tol'] + '</td><td>'+ result[i]['totaldistance'] + '</td><td>' +
                      result[i]['luggage'] + '</td><td>'+ result[i]['totalefare'] + '</td><td>' + result[i]['cab'] +
-                      '</td></tr>';
+                    '</td><td><button class="btn btn-secondary pl-3 invoice" data-toggle="modal" data-target="#exampleModal"  data-id='+ result[i]['rideid'] + '>\
+                    <i class="fas fa-receipt text-dark" aria-hidden="true" ></i></button> </td></tr>';
                 }
                 html += '</table>';
                 $("#com_ri").html(html);
             }
         });
     });
+    //invoice
+    $(document).on("click",".invoice",function () {
+        var action = "invoice";
+        var id=$(this).data('id');
+        $.ajax({
+            url: "deup.php",
+            type: "post",
+            data: {
+                id:id,
+                action: action
+            },
+            dataType: "json",
+            success: function (result) {
+                var htmll='';
+              for(var i=0;i<result.length;i++)
+              {
+                    htmll+='<table class="table"><tr>\
+                    <td>RIDE DATE</td><td>' + result[i]['ridedate'] + '</td></tr>\
+                    <tr><td>FROM</td><td>' + result[i]['froml'] + '</td></tr>\
+                    <tr><td>TO</td><td>' +result[i]['tol'] + '</td></tr>\
+                    <tr><td>TOTAL Distance</td><td>'+ result[i]['totaldistance'] + '</td></tr>\
+                    <tr><td>TOTAL luggage</td><td>' +result[i]['luggage'] + '</td></tr>\
+                    <tr><td>TOTAL fare</td><td>'+ result[i]['totalefare'] + '</td></tr>\
+                    <tr><td>CAB TYPE</td><td>' + result[i]['cab'] +'</td></tr></table>';
+                
+                // htmll += '</table>';
+                $(".modal-body").html(htmll);
+             }
+        }
+    });
+    });
+    //end invoice
     //end completed ride
     //All ride
     $(document).on("click","#allri",function () {
@@ -190,7 +223,7 @@ $(document).ready(function () {
         html = '<h1 class="text-center">All rides</h1><table class="table table-striped table-dark">\
         <tr><td>Ridedate</td><td>From</td><td>To</td><td>Distance</td><td>Luggage<small>(kg)</small></td>\
         <td>Amount</td><td>Cab</td></tr>';
-        var action = "compride";
+        var action = "allride";
         $.ajax({
             url: "deup.php",
             type: "post",

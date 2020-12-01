@@ -46,7 +46,7 @@ $out=$obj->getusrloc($data);
     </button>
     <div class="collapse navbar-collapse" id="myNavbar">
   <ul class="navbar-nav text-right ml-auto mr-3 ht">
-  <?php if(empty($_SESSION['userdata']) ) :?>
+    <?php if(empty($_SESSION['userdata']) ) :?>
              <li class="nav-item">
              <a class="nav-link pt-3" href="#">FEATURES</a>
              <section>
@@ -62,7 +62,8 @@ $out=$obj->getusrloc($data);
           <a class="btn btn-info rounded-pill  mt-1 ml-3" 
           href="login.php">SIGN-UP</a>
         </li>
-        <?php endif;?>
+    <?php 
+    endif;?>
         <?php if (!empty($_SESSION['userdata']) ) :?>
   
     <li class="nav-item dropdown">
@@ -74,7 +75,8 @@ $out=$obj->getusrloc($data);
         <a class="btn btn-info rounded-pill  
         mt-1 ml-3 pr-3 pl-3" href="logout.php">logout</a>
       </li>
-      <?php endif;?>
+    <?php 
+        endif;?>
   </ul>
 </nav>
   

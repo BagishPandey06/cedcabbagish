@@ -21,7 +21,8 @@ if (isset($_POST['submit'])) {
     $name=isset($_POST['name'])?$_POST['name']:'';
     $mobile=isset($_POST['mobile'])?$_POST['mobile']:'';
     if ($password != $repassword) {
-        $error=array('input'=>'password','msg'=>'password doesnt match1');
+        echo "<script>alert('password doesnt match1');</script>";
+        return false;
     } else {
          $pass=md5($password);
     }
@@ -34,7 +35,8 @@ if (isset($_POST['submit'])) {
    
         $row = mysqli_fetch_assoc($res);
         if ($username==$row['username']) {
-            $error=array('input'=>'username','msg'=>'Username already exsist');
+            echo "<script>alert('username already exsist');</script>";
+            return false;
         } 
     }
 

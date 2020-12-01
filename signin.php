@@ -28,6 +28,16 @@ require 'insertsign.php';
   </script>
   <link rel="stylesheet" type="text/css" href="rideindex.css">
   <title>BOOK A RIDE</title>
+  <script>
+  function check(){
+    if ((event.keyCode > 47) && (event.keyCode < 58)) {
+      return true;
+    } else {
+      alert("Please enter numeric value only");
+      return false;
+    }
+  }
+  </script>
 </head>
 <body>
 <nav class="navbar navbar-expand-md   navbar-light">
@@ -66,10 +76,14 @@ require 'insertsign.php';
   </div>
   <div class="form-group">
     <label for="mobile">Mobile</label>
-    <input type="number" name="mobile" required style="width:20rem;">
+    <input type="number" name="mobile" onkeypress="return check()" required style="width:20rem;">
   </div>
+  <div class="form-group d-block">
   <button type="submit" name="submit" class="btn">Submit</button>
+  <button type="submit" onclick='window.location.href="login.php"' name="submit" class="btn btn-warning ml-5">LOGIN</button>
+  </div>
 </form>
+
   </article>
   </div>
   <div class="col-sm-8" id="limg">
@@ -108,5 +122,6 @@ require 'insertsign.php';
     </div>
   </div>
   </section>
+  
   </body>
 </html>

@@ -24,6 +24,7 @@ if (isset($_POST['submit'])) {
         $obj=new User();
         $out=$obj->login($username, $pass, $data);
         if ($out=="customer") {
+           
             if (!empty($_post['rem'])) { 
                 setcookie("username", $username, time()+(10*36524*60*60));
                 setcookie("password", $pass, time()+(10*36524*60*60));
@@ -39,8 +40,8 @@ if (isset($_POST['submit'])) {
         } elseif ($out=="admin") {
             header('location:admin/dashboardadmin.php');
         } else {
-            
-            header('location:login.php');
+            echo '<script>alert("Please enter valid username and password");</script>';
+            return false;
         }     
        
     }

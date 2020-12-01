@@ -8,6 +8,7 @@
  * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
  * @link     http://localhost/training/taskmy/register.php?
  */
+
    class User
 {
     public $userid;
@@ -48,13 +49,15 @@
                  
                 $r=$row["isadmin"];
                 if ($r == '1') {
+                    $_SESSION['admindata']=array
+                    ('username'=>$row['username'],'id'=>$row['userid']);
                     $out="admin";
-                    $_SESSION["admindata"]=array
-                ('username'=>$row['username'],'id'=>$row['userid']);
+                    
                 } else {
-                    $out="customer";
                     $_SESSION["userdata"]=array
-                ('username'=>$row['username'],'id'=>$row['userid']);
+            ('username'=>$row['username'],'id'=>$row['userid']);         
+                    $out="customer";
+                    
                 }
                 return $out;
             }
@@ -80,20 +83,26 @@
     }
     public function get($userid, $data)
     {
-        $sql="SELECT*FROM ride WHERE `userid`=$userid and `status`=1";
-        $res=$data->query($sql);
-        if ($res->num_rows > 0) {
-                    $r=0;
-                    $t=0;
-            while ($row=$res->fetch_assoc()) {
-                   $t++;     
-                $r=(int)$row['totalefare']+$r;
+        $tr=mysqli_fetch_assoc($data->query("SELECT count(rideid) as num from ride WHERE `userid`=$userid"));
+        $cr=mysqli_fetch_assoc($data->query("SELECT count(rideid) as num from ride where `status`=1 and `userid`=$userid"));
+        $pr=mysqli_fetch_assoc($data->query("SELECT count(rideid) as num from ride where `status`=0 and `userid`=$userid"));
+        $canr=mysqli_fetch_assoc($data->query("SELECT count(rideid) as num from ride where `status`=2 and `userid`=$userid"));
+        $te=$data->query("SELECT * from ride where `status`=1 and `userid`=$userid");
+        $r=0;
+        while ($row=$te->fetch_assoc()) {    
+            $r=(int)$row['totalefare']+$r;
 
-            }
-            $d=array('a'=>$r,'b'=>$t);
+     }
+            $d=array(
+                'a'=>$r,
+                'b'=>$tr['num'],
+                'c'=>$cr['num'],
+                'd'=>$pr['num'],
+                'e'=>$canr['num']
+            );
             return $d;    
             
-        }
+
         
     }
     public function getuser($userid, $data)
@@ -197,6 +206,18 @@
     public function allride($userid, $data) 
     {
         $sql = "SELECT * FROM ride where`userid`='$userid'";
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            while ($row=$res->fetch_assoc()) {
+                $this->rows[]=$row;
+            }
+            return json_encode($this->rows);
+        }
+       
+    }
+    public function invoice($id, $data) 
+    {
+        $sql = "SELECT * FROM ride where`rideid`='$id'";
         $res=$data->query($sql);
         if ($res->num_rows > 0) {
             while ($row=$res->fetch_assoc()) {

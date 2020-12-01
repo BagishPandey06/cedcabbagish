@@ -40,7 +40,7 @@ case 'compride':
      $out=$obj->compride($userid, $data);
      print_r($out);
     break;
-case 'compride':
+case 'allride':
      $out=$obj->allride($userid, $data);
      print_r($out);
     break;  
@@ -49,6 +49,11 @@ case 'pass':
      $old=$_POST['old'];
      $out=$obj->pass($newp, $old, $userid, $data);  
      print_r($out);
+case 'invoice':
+     $id=$_POST['id'];
+     $out=$obj->invoice($id, $data);
+     print_r($out);
+    break;
 
 }
 

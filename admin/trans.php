@@ -8,11 +8,13 @@
  * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
  * @link     http://localhost/training/taskmy/logout.php
  */
+session_start();
 require '../Config.php';
 require 'Admin.php';
 $obj =new Config();
 $data = $obj->Connect();
 $obj=new Admin();
+$adminid=$_SESSION['admindata']['id'];
 $a=$_POST['action'];
 switch($a){
 case 'insertloc':
@@ -94,6 +96,11 @@ case 'getsortride':
     
     print_r($out);
     break;
+case 'password':
+    $newp=$_POST['newp'];
+    $old=$_POST['old'];
+    $out=$obj->pass($newp, $old, $adminid, $data);  
+    print_r($out);
 }
 
      $data->close();

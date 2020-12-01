@@ -10,6 +10,7 @@ $(document).ready(function () {
     $("#completride").hide();
     $("#canride").hide();
     $("#fs").hide();
+    $("#chngadminpass").hide();
 
     $(document).on("click", "#home", function () {
         $("#locationsec").hide();
@@ -20,6 +21,7 @@ $(document).ready(function () {
         $("#pendride").hide();
         $("#acptuser").hide();
         $("#completride").hide();
+        $("#chngadminpass").hide();
         $("#canride").hide();
         $("#homeadmin").show();
         $("#fs").hide();
@@ -33,6 +35,7 @@ $(document).ready(function () {
         $("#allride").hide();
         $("#penduser").hide();
         $("#acptuser").hide();
+        $("#chngadminpass").hide();
         $("#completride").hide();
         $("#canride").hide();
         $("#homeadmin").hide();
@@ -128,6 +131,7 @@ $(document).ready(function () {
         $("#alluser").hide();
         $("#allride").hide();
         $("#penduser").hide();
+        $("#chngadminpass").hide();
         $("#pendride").hide();
         $("#acptuser").hide();
         $("#completride").show();
@@ -170,6 +174,7 @@ $(document).ready(function () {
         $("#alluser").hide();
         $("#allride").hide();
         $("#penduser").hide();
+        $("#chngadminpass").hide();
         $("#pendride").hide();
         $("#acptuser").hide();
         $("#completride").hide();
@@ -212,6 +217,7 @@ $(document).ready(function () {
         $("#alluser").hide();
         $("#allride").show();
         $("#penduser").hide();
+        $("#chngadminpass").hide();
         $("#pendride").hide();
         $("#acptuser").hide();
         $("#completride").hide();
@@ -251,6 +257,7 @@ $(document).ready(function () {
         $("#alluser").hide();
         $("#allride").show();
         $("#penduser").hide();
+        $("#chngadminpass").hide();
         $("#pendride").hide();
         $("#acptuser").hide();
         $("#completride").hide();
@@ -290,6 +297,7 @@ $(document).ready(function () {
         $("#alluser").hide();
         $("#allride").show();
         $("#penduser").hide();
+        $("#chngadminpass").hide();
         $("#pendride").hide();
         $("#acptuser").hide();
         $("#completride").hide();
@@ -333,6 +341,7 @@ $(document).ready(function () {
         $("#allride").hide();
         $("#pendride").hide();
         $("#acptuser").hide();
+        $("#chngadminpass").hide();
         $("#completride").hide();
         $("#canride").hide();
         $("#homeadmin").hide();
@@ -421,6 +430,7 @@ $(document).ready(function () {
         $("#addlocation").hide();
         $("#alluser").hide();
         $("#allride").hide();
+        $("#chngadminpass").hide();
         $("#penduser").hide();
         $("#pendride").hide();
         $("#acptuser").show();
@@ -456,10 +466,11 @@ $(document).ready(function () {
 
 
     // show all users
-    $(document).click("click", "#alluserb", function () {
+    $(document).on("click", "#alluserb", function () {
         $("#locationsec").hide();
         $("#addlocation").hide();
         $("#alluser").show();
+        $("#chngadminpass").hide();
         $("#allride").hide();
         $("#penduser").hide();
         $("#pendride").hide();
@@ -498,7 +509,7 @@ $(document).ready(function () {
     //.........................................location section..............................................................//
 
     //show location
-    $(document).on("click","#location", function () {
+    $(document).on("click", "#location", function() {
         
         $("#addlocation").hide();
         $("#alluser").hide();
@@ -508,6 +519,7 @@ $(document).ready(function () {
         $("#acptuser").hide();
         $("#completride").hide();
         $("#canride").hide();
+        $("#chngadminpass").hide();
         $("#homeadmin").hide();
         $("#fs").hide();
         $("#locationsec").show();
@@ -540,7 +552,7 @@ $(document).ready(function () {
 
 
     //add location
-    $(document).on("click", "#alocation", function () {
+    $(document).on("click","#alocation",function () {
         $("#locationsec").hide();
         $("#addlocation").show();
         $("#alluser").hide();
@@ -551,6 +563,7 @@ $(document).ready(function () {
         $("#completride").hide();
         $("#canride").hide();
         $("#homeadmin").hide();
+        $("#chngadminpass").hide();
         $("#fs").hide();
 
     });
@@ -580,4 +593,51 @@ $(document).ready(function () {
         });
     });
     //add location ends
+
+    //.........................................change admin section..............................................................//
+    $(document).on("click","#adminpass", function () {
+        $("#locationsec").hide();
+        $("#addlocation").hide();
+        $("#alluser").hide();
+        $("#allride").hide();
+        $("#penduser").hide();
+        $("#pendride").hide();
+        $("#acptuser").hide();
+        $("#completride").hide();
+        $("#canride").hide();
+        $("#homeadmin").hide();
+        $("#fs").hide();
+        $("#chngadminpass").show();
+    });
+    $(document).on("click","#chngpass",function () {
+        var old;
+        var newp;
+        old = $("#op").val();
+        newp = $("#np").val();
+        var action="password";
+        $.ajax({
+            
+             url: "trans.php",
+             type: "post",
+             data:{
+                 old:old,
+                 newp:newp,
+                 action:action,
+            },
+            success: function (result) {
+                if(result=='inserted'){
+                    alert("password updated succesfully!!please login again");
+                    
+                    window.location.href="../logout.php";  
+                } else {
+                    alert("password doesnot match");
+                }
+            }
+        });
+    });
+
+
+    //.........................................location section..............................................................//
+
+
 });

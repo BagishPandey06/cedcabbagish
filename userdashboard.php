@@ -17,7 +17,7 @@ $out=$obj->get($userid, $data);
 <section id="userdash">
 <div class="row  ml-5 text-dark text-center">
   <div class="col-sm-4 mt-3">
-    <div class="card  bg-success" style="width :15rem;">
+    <div class="card  bg-info" style="width :15rem;">
         <div class="card-header">
             <h5 class="card-title">Total ride</h5>
             <i class="fa fa-car" style="font-size:20px;color:rgb(10, 10, 10);"></i>
@@ -29,8 +29,52 @@ $out=$obj->get($userid, $data);
     </div>
   </div>
 
+
+
+
   <div class="col-sm-4 mt-3">
-    <div class="card  bg-info" style="width :15rem;">
+    <div class="card  bg-success" style="width :15rem;">
+        <div class="card-header">
+            <h5 class="card-title">completed ride</h5>
+            <i class="fa fa-car" style="font-size:20px;color:rgb(10, 10, 10);"></i>
+        </div>
+      <div class="card-body">
+        <h1 class="card-text"><?php echo $out['c'];?></h1>
+       
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-4 mt-3">
+    <div class="card  bg-warning" style="width :15rem;">
+        <div class="card-header">
+            <h5 class="card-title">pending ride</h5>
+            <i class="fa fa-car" style="font-size:20px;color:rgb(10, 10, 10);"></i>
+        </div>
+      <div class="card-body">
+        <h1 class="card-text"><?php echo $out['d'];?></h1>
+       
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="col-sm-4 mt-3">
+    <div class="card  bg-danger" style="width :15rem;">
+        <div class="card-header">
+            <h5 class="card-title">canceled ride</h5>
+            <i class="fa fa-car" style="font-size:20px;color:rgb(10, 10, 10);"></i>
+        </div>
+      <div class="card-body">
+        <h1 class="card-text"><?php echo $out['e'];?></h1>
+       
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-4 mt-3">
+    <div class="card  bg-secondary" style="width :15rem;">
         <div class="card-header">
             <h5 class="card-title">Total money spent</h5>
             <i class="fa fa-inr" style="font-size:20px;color:rgb(10, 10, 10);"></i>
@@ -101,6 +145,27 @@ $out=$obj->getuser($userid, $data);
     <section id="com_ri">
     </section>
     <!-- end pending user ride details -->
+    <!-- invoice details -->
+    <section id="bill">
+            
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">INVOICE</h5>  
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">PRINT</button>
+      </div>
+    </div>
+  </div>
+</div>
+    </section>
+    <!-- end invoice details -->
     <!-- pending user ride details -->
     <section id="all_ri">
     </section>
