@@ -119,6 +119,17 @@ class Admin
         return $out;
        
     }
+    public function ban($id, $data) 
+    {
+        $sql ="UPDATE user SET `isblock`=0,`dateofsignup`=CURDATE() WHERE `userid`=$id";
+        if ($res=$data->query($sql)==true) {
+            $out="inserted";
+        } else {
+            $out="khtm"; 
+        }
+        return $out;
+       
+    }
     public function deluser($id, $data) 
     {
         $sql ="DELETE FROM user WHERE `userid`=$id";

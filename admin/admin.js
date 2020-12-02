@@ -4,12 +4,14 @@ $(document).ready(function () {
     $("#chngadminpass").hide();
         $("#edlocation").hide();
         $("#addlocation").hide();
-    $(document).on("click", "#home", function () {  
         $("#homeadmin").show();
+    $(document).on("click","#home", function () {  
+        
         $('#fs').hide();
         $("#chngadminpass").hide();
         $("#edlocation").hide();
         $("#addlocation").hide();
+        window.location.href="dashboardadmin.php";
     });
     //.........................................ride section..............................................................//
     //pending rides 
@@ -425,7 +427,7 @@ $(document).ready(function () {
         $("#addlocation").hide();
         html = '<h1 class="text-center font-weight-bold">Accepted users</h1>\
         <table class="table table-striped table-dark"><tr class="font-weight-bold table-success text-dark"><td>username</td>\
-        <td>name</td><td>mobile</td><td>Date of sign up</td></tr>';
+        <td>name</td><td>mobile</td><td>Date of sign up</td><td>Action</td></tr>';
         var action = "getacptuser";
         $.ajax({
             url: "trans.php",
@@ -439,7 +441,8 @@ $(document).ready(function () {
                 for (var i = 0; i < result.length; i++) {
                     html += '<tr><td>' + result[i]['username'] + '</td><td>' + result[i]['name'] +
                         '</td><td>' + result[i]['mobile'] + '</td><td>' + result[i]['dateofsignup'] +
-                        '</td></tr>';
+                        '</td><td>'+'<button class="btn btn-danger pl-3 ban" \
+                        data-id='+ result[i]['userid'] + '><i class="fa fa-ban" aria-hidden="true"></i></button>'+'</td></tr>';
                 }
                 html += '</table>';
                 $("#homeadmin").html(html);
@@ -447,7 +450,27 @@ $(document).ready(function () {
         });
     });
     //End Accepted user
-
+ //admin blocks the accepted  user
+ $(document).on("click", '.ban', function () {
+    var id = $(this).data('id');
+    var action = "blockuser";
+    $.ajax({
+        url: "trans.php",
+        type: "post",
+        data: {
+            action: action,
+            id: id
+        },
+        success: function (result) {
+            if (result == "inserted") {
+                showdata();
+            } else {
+                alert("result");
+            }
+        }
+    });
+});
+//end admin blocks the accepted  user 
 
 
     // show all users

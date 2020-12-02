@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
          $pass=md5($password);
     }
 
-    $sql="select * from user where (username='$username')";
+    $sql="SELECT * from user where `username` LIKE '$username'";
 
     $res=mysqli_query($data, $sql);
 

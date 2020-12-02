@@ -120,6 +120,12 @@ case 'editloc':
     $out=$obj->editloc($id, $data);
     print_r($out);
     break;
+
+case 'blockuser':
+    $id=$_POST['id'];
+    $out=$obj->ban($id, $data);
+    print_r($out);
+    break;
 }
 
      $data->close();

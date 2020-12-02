@@ -93,13 +93,13 @@ $out=$obj->getusrloc($data);
                 <h1 class="head ">Book Your ride to Travel anywhere in city</h1>
                 <h2 class="head">choose your ride of choice</h2>
             </div>
-            <div class="row mb-5 bd-dark">
+            <div class="row mb-5 mr-0 bd-dark">
               <div class="col-sm-4 a ml-5">
                 <form action="#" class="ml-5 mr-5">
 
                             <div class="text-center mt-2 ">
                                 <span class="p-1 pr-2 pl-2 b mb-3">LUCKNOW</span>
-                                <h3 class=" mb-0 c mt-3">your everyday Travel partner</h3>
+                                <h3 class=" mb-0 c mt-3">Your Everyday Travel Partner</h3>
                                 <h4 class="mt-0 d">AC cabs for point to point traverl</h4>
                             </div>
 
