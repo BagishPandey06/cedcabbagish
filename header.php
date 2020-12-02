@@ -19,6 +19,7 @@ require 'user.php';
 $obj =new Config();
 $data = $obj->Connect();
 
+
 if (!empty($_SESSION['ridedata'])) {
     $pick=$_SESSION['ridedata']['pick'];
     $drop=$_SESSION['ridedata']['drop'];
@@ -50,6 +51,26 @@ if (!empty($_SESSION['ridedata'])) {
   </script>
   <link rel="stylesheet" type="text/css" href="rideindex.css">
   <script src="ride.js"></script>
+  <script>
+  function result(){
+    if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
+      alert("Please enter numeric value only");
+      return false;
+    } else {
+     
+      return true;
+    }
+  }
+  function printinvoice(exampleModal){
+    var printt=document.getElementById('exampleModal');
+    var winPrint =window.open('', '', 'width=900, hegiht=650');
+    winPrint.document.write(printt.innerHTML);
+    winPrint.document.close();
+    winPrint.focus();
+    winPrint.print();
+    winPrint.close(); 
+  }
+  </script>
   <title>BOOK A RIDE</title>
 </head>
 

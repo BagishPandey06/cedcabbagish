@@ -9,14 +9,16 @@ $(document).ready(function () {
     $("#changepass").hide();
     $("#pnd_ri").hide();
     $("#com_ri").hide();
-    $("#all").hide();
+    $("#all_ri").hide();
+    $("#canc").hide();
     $(document).on("click","#home",function () {
         $("#userdash").show();
         $("#updateinfo").hide();
         $("#changepass").hide();
         $("#pnd_ri").hide();
         $("#com_ri").hide();
-        $("#all").hide();
+        $("#all_ri").hide();
+        $("#canc").hide();
     });
     //update info
     $(document).on("click","#update",function () {
@@ -26,6 +28,7 @@ $(document).ready(function () {
             $("#pnd_ri").hide();
             $("#com_ri").hide();
             $("#all_ri").hide();
+            $("#canc").hide();
     });
     //change password
     $(document).on("click","#chngpass",function () {
@@ -35,6 +38,7 @@ $(document).ready(function () {
         $("#pnd_ri").hide();
         $("#com_ri").hide();
         $("#all_ri").hide();
+        $("#canc").hide();
 
     });
     $(document).on("click","#info",function () {
@@ -92,12 +96,13 @@ $(document).ready(function () {
             $("#pnd_ri").show();
             $("#com_ri").hide();
             $("#all_ri").hide();
+            $("#canc").hide();
             showridea();
         });
         function showridea(){
            
             html = ' <h1 class="text-center">pending rides</h1><table class="table table-striped table-dark">\
-            <tr><td>Ridedate</td><td>From</td><td>To</td><td>Distance</td><td>Luggage<small>(kg)</small></td><td>Amount</td><td>Cab</td><td>Actions</td></tr>';
+            <tr class="font-weight-bold"><td>Ridedate</td><td>From</td><td>To</td><td>Distance</td><td>Luggage<small>(kg)</small></td><td>Amount</td><td>Cab</td><td>Actions</td></tr>';
             var action="pndri";
             $.ajax({
                  url: "deup.php",
@@ -154,8 +159,9 @@ $(document).ready(function () {
             $("#pnd_ri").hide();
             $("#com_ri").show();
             $("#all_ri").hide();
+            $("#canc").hide();
         html = '<h1 class="text-center">completed rides</h1><table class="table table-striped table-dark">\
-        <tr><td>Ridedate</td><td>From</td><td>To</td><td>Distance</td><td>Luggage<small>(kg)</small></td>\
+        <tr class="font-weight-bold"><td>Ridedate</td><td>From</td><td>To</td><td>Distance</td><td>Luggage<small>(kg)</small></td>\
         <td>Amount</td><td>Cab</td><td>Invoice print</td></tr>';
         var action = "compride";
         $.ajax({
@@ -171,8 +177,8 @@ $(document).ready(function () {
                     html +=  '<tr><td>' + result[i]['ridedate'] + '</td><td>' + result[i]['froml'] + '</td><td>' +
                     result[i]['tol'] + '</td><td>'+ result[i]['totaldistance'] + '</td><td>' +
                      result[i]['luggage'] + '</td><td>'+ result[i]['totalefare'] + '</td><td>' + result[i]['cab'] +
-                    '</td><td><button class="btn btn-secondary pl-3 invoice" data-toggle="modal" data-target="#exampleModal"  data-id='+ result[i]['rideid'] + '>\
-                    <i class="fas fa-receipt text-dark" aria-hidden="true" ></i></button> </td></tr>';
+                    '</td><td><button class="btn btn-outline-success pl-3 invoice" data-toggle="modal" data-target="#exampleModal"  data-id='+ result[i]['rideid'] + '>\
+                    <i class="fas fa-receipt " aria-hidden="true" ></i></button> </td></tr>';
                 }
                 html += '</table>';
                 $("#com_ri").html(html);
@@ -212,6 +218,39 @@ $(document).ready(function () {
     });
     //end invoice
     //end completed ride
+    $(document).on("click","#canri",function () {
+        $("#userdash").hide();
+        $("#updateinfo").hide();
+        $("#changepass").hide();
+        $("#pnd_ri").hide();
+        $("#com_ri").hide();
+        $("#all_ri").hide();
+        $("#canc").hide();
+        $("#canc").show();
+    html = '<h1 class="text-center">Canceled Rides</h1><table class="table table-striped table-dark">\
+    <tr class="font-weight-bold"><td>Ridedate</td><td>From</td><td>To</td><td>Distance</td><td>Luggage<small>(kg)</small></td>\
+    <td>Amount</td><td>Cab</td></tr>';
+    var action = "canc";
+    $.ajax({
+        url: "deup.php",
+        type: "post",
+        data: {
+            action: action
+        },
+        dataType: "json",
+        success: function (result) {
+            //alert(result);
+            for (var i = 0; i < result.length; i++) {
+                html +=  '<tr><td>' + result[i]['ridedate'] + '</td><td>' + result[i]['froml'] + '</td><td>' +
+                result[i]['tol'] + '</td><td>'+ result[i]['totaldistance'] + '</td><td>' +
+                 result[i]['luggage'] + '</td><td>'+ result[i]['totalefare'] + '</td><td>' + result[i]['cab'] +
+                  '</td></tr>';
+            }
+            html += '</table>';
+            $("#canc").html(html);
+        }
+    });
+});
     //All ride
     $(document).on("click","#allri",function () {
             $("#userdash").hide();
@@ -219,10 +258,11 @@ $(document).ready(function () {
             $("#changepass").hide();
             $("#pnd_ri").hide();
             $("#com_ri").hide();
+            $("#canc").hide();
             $("#all_ri").show();
         html = '<h1 class="text-center">All rides</h1><table class="table table-striped table-dark">\
-        <tr><td>Ridedate</td><td>From</td><td>To</td><td>Distance</td><td>Luggage<small>(kg)</small></td>\
-        <td>Amount</td><td>Cab</td></tr>';
+        <tr class="font-weight-bold"><td>Ridedate</td><td>From</td><td>To</td><td>Distance</td><td>Luggage<small>(kg)</small></td>\
+        <td>Amount</td><td>Cab</td><td>status</td></tr>';
         var action = "allride";
         $.ajax({
             url: "deup.php",
@@ -234,16 +274,24 @@ $(document).ready(function () {
             success: function (result) {
                 //alert(result);
                 for (var i = 0; i < result.length; i++) {
+                    if (result[i]['status'] == 0) {
+                        status = '<td class="text-warning">pending..<i class="fa fa-spinner fa-spin" style="font-size:24px"></i></td>';
+                    } else if (result[i]['status'] == 1) {
+                        status = '<td class="text-success">Completed !</td>';
+                    } else {
+                        status = '<td class="text-danger">Cancle</td>';
+                    }
                     html +=  '<tr><td>' + result[i]['ridedate'] + '</td><td>' + result[i]['froml'] + '</td><td>' +
                     result[i]['tol'] + '</td><td>'+ result[i]['totaldistance'] + '</td><td>' +
                      result[i]['luggage'] + '</td><td>'+ result[i]['totalefare'] + '</td><td>' + result[i]['cab'] +
-                      '</td></tr>';
+        '</td>'+status+'</tr>';
                 }
                 html += '</table>';
                 $("#all_ri").html(html);
             }
         });
     });
+    
     //end All ride
         // ---------------------------------------------End ride details----------------------------------------
 

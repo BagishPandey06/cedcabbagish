@@ -24,7 +24,7 @@ $out=$obj->get($userid, $data);
         </div>
       <div class="card-body">
         <h1 class="card-text"><?php echo $out['b'];?></h1>
-       
+        <button id="allri" class="btn btn-outline-light w-100"><i class="fa fa-arrow-circle-right"></i></button>  
       </div>
     </div>
   </div>
@@ -40,7 +40,7 @@ $out=$obj->get($userid, $data);
         </div>
       <div class="card-body">
         <h1 class="card-text"><?php echo $out['c'];?></h1>
-       
+        <button id="comri" class="btn btn-outline-light w-100"><i class="fa fa-arrow-circle-right"></i></button>      
       </div>
     </div>
   </div>
@@ -53,7 +53,7 @@ $out=$obj->get($userid, $data);
         </div>
       <div class="card-body">
         <h1 class="card-text"><?php echo $out['d'];?></h1>
-       
+        <button id="pndri" class="btn btn-outline-light w-100"><i class="fa fa-arrow-circle-right"></i></button>  
       </div>
     </div>
   </div>
@@ -68,7 +68,7 @@ $out=$obj->get($userid, $data);
         </div>
       <div class="card-body">
         <h1 class="card-text"><?php echo $out['e'];?></h1>
-       
+        <button id="canri" class="btn btn-outline-light w-100"><i class="fa fa-arrow-circle-right"></i></button>  
       </div>
     </div>
   </div>
@@ -81,58 +81,87 @@ $out=$obj->get($userid, $data);
         </div>
       <div class="card-body">
         <h1 class="card-text"><?php echo $out['a'];?></h1>
-        
+        <button id="allri" class="btn btn-outline-light w-100"><i class="fa fa-arrow-circle-right"></i></button>  
         </div>
     </div>
   </div>
 </div>
 </section>
 <!-- end USER dasboard -->
+
+
+
+
+
 <!-- update info form -->
-<section id="updateinfo">
+<section id="updateinfo" class="center">
 <?php
     $obj=new User();
 $out=$obj->getuser($userid, $data);
 ?>
+<div class="row text-light">
+<div class="col-lg-4"></div>
+  <div class="col-lg-4 bg-dark mt-5 p-5 ml-5">
+  <h1 class=" text-center">Update Details</h1>
 <form action="" method="POST">
                 <p>
-                    <label for="name">name:<br>
+                    <label for="name" class="font-wegiht-bold">Name:<br>
                     <input type="text" name="name" id="name" 
-                    value="<?php echo $out['a'];?>"required>
+                    value="<?php echo $out['a'];?>" class="form-control w-100" required>
                     </label>
                 </p>
                 <p>
-                    <label for="mobile">mobile:<br>
+                    <label for="mobile">Mobile:<br>
                         <input type="number" name="mobile" id="mobile"
-                        value="<?php echo $out['b'];?>" required>
+                        value="<?php echo $out['b'];?>" onkeypress="return result()" class="form-control w-100" required>
                     </label>
                 </p>
                 <p>
-                <input type="button" name="submit" id="info" class="btn" value="SUBMIT">
+                <input type="button" name="submit" id="info" class="btn btn-outline-success w-100" value="SUBMIT">
                 </p>
             </form>
+            </div>
+            </div>
 </section>
 <!-- end update info form -->
+
+
+
+
+
+
+
+
+
+
+
 <!-- change password form -->
 <section id="changepass">
+<div class="row text-light">
+<div class="col-lg-4"></div>
+  <div class="col-lg-4 bg-dark mt-5 p-5 ml-5">
+  <h1 class=" text-center">Update Password</h1>
+
 <form action="" method="POST">
                 <p>
-                    <label for="old password">old Password:<br>
-                    <input type="password" name="pass" id="opass"
-                    value=""required>
+                    <label for="old password">Old Password:<br>
+                    <input type="password" name="pass" class="form-control w-100" id="opass"
+                    required>
                     </label>
                 </p>
                 <p>
                     <label for="new password">New Password:<br>
-                        <input type="password" name="newpass" id="npass"
-                        value="" required>
+                        <input type="password" name="newpass" class="form-control w-100" id="npass"
+                        required>
                     </label>
                 </p>
                
                 <p>
-                    <input type="button" name="submit" class="btn cpass" value="SUBMIT">
+                    <input type="button" name="submit" class="btn btn-outline-success  cpass w-100" value="SUBMIT">
                 </p>
             </form>
+</div>
+</div>
 </section>
 <!-- end change password form -->
 
@@ -141,10 +170,12 @@ $out=$obj->getuser($userid, $data);
     <section id="pnd_ri">
     </section>
     <!-- end pending user ride details -->
+   
     <!-- pending user ride details -->
     <section id="com_ri">
     </section>
     <!-- end pending user ride details -->
+    <section id="canc"></section>
     <!-- invoice details -->
     <section id="bill">
             
@@ -159,7 +190,7 @@ $out=$obj->getuser($userid, $data);
       <div class="modal-body">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">PRINT</button>
+        <button type="button" class="btn btn-secondary" onclick="printinvoice('exampleModal')" data-dismiss="modal">PRINT</button>
       </div>
     </div>
   </div>

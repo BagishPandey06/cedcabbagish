@@ -24,6 +24,12 @@ case 'insertloc':
         $out=$obj->insertloc($location, $distance, $avi, $data);
       print_r($out);
     break;
+case 'uploc':
+    $id=$_POST['id'];
+    $avi=$_POST['avi'];
+        $out=$obj->uploc($avi, $id, $data);
+        print_r($out);
+    break;
 case 'getloc':
      $out=$obj->getloc($data);
     print_r($out);
@@ -82,6 +88,9 @@ case 'getfilterride':
         $out=$obj->getfilterridew($data);
     } elseif ($filter=='month') {
         $out=$obj->getfilterridem($data);
+    } else {
+        $out=$obj->getride($data);
+    
     }
     
     print_r($out);
@@ -90,9 +99,9 @@ case 'getsortride':
     $sort=$_POST['sort'];
     if ($sort=='ridedate') {
         $out=$obj->getsortd($data);
-    } elseif ($filter=='fare') {
+    } elseif ($sort=='fare') {
         $out=$obj->getsortf($data);
-    }
+    } 
     
     print_r($out);
     break;
@@ -101,6 +110,16 @@ case 'password':
     $old=$_POST['old'];
     $out=$obj->pass($newp, $old, $adminid, $data);  
     print_r($out);
+case 'invoice':
+    $id=$_POST['id'];
+    $out=$obj->invoice($id, $data);
+    print_r($out);
+    break;
+case 'editloc':
+    $id=$_POST['id'];
+    $out=$obj->editloc($id, $data);
+    print_r($out);
+    break;
 }
 
      $data->close();

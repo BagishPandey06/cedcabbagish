@@ -27,14 +27,10 @@ if (isset($_POST['submit'])) {
            
             if (!empty($_post['rem'])) { 
                 setcookie("username", $username, time()+(10*36524*60*60));
-                setcookie("password", $pass, time()+(10*36524*60*60));
             } else {
                 if (isset($_COOKIE['username'])) {
                     setcookie("username", "");
                 } 
-                if (isset($_COOKIE['password'])) {
-                    setcookie("password", "");
-                }
             }
             header('location:userdashboard.php');
         } elseif ($out=="admin") {

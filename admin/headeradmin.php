@@ -38,6 +38,16 @@ $out=$objj->fetchdata($data);
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js">
   </script>
   <link rel="stylesheet" type="text/css" href="rideadmin.css">
+  <script> 
+  function printinvoice(exampleModal){
+    var printt=document.getElementById('exampleModal');
+    var winPrint =window.open('', '', 'width=900, hegiht=650');
+    winPrint.document.write(printt.innerHTML);
+    winPrint.document.close();
+    winPrint.focus();
+    winPrint.print();
+    winPrint.close(); 
+  }</script>
   <title>BOOK A RIDE</title>
 </head>
 <body>
@@ -60,14 +70,14 @@ $out=$objj->fetchdata($data);
   </nav>
   <div class="container m-0">
     <div class="row">
-      <div class="col-sm-3 bg-dark">
+      <div class="col-sm-2 bg-dark pt-5">
         <div class="dropdown d-block mb-5 mt-5">
-  <button class="btn btn-secondary " type="button" id="home">
+  <button class="btn btn-outline-success " type="button" id="home">
   <i class="fa fa-home" style="font-size:20px;color:rgb(10, 10, 10);"></i> &nbsp;Home
   </button>
 </div>
 <div class="dropdown d-block mb-5 mt-5">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <button class="btn btn-outline-success  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   <i class="fa fa-car" style="font-size:20px;color:rgb(10, 10, 10);"></i> &nbsp;Rides
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -78,7 +88,7 @@ $out=$objj->fetchdata($data);
   </div>
 </div>
 <div class="dropdown d-block mb-5 mt-5">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   <i class="fa fa-user" style="font-size:20px;color:rgb(10, 10, 10);"></i> &nbsp; Users
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -88,7 +98,7 @@ $out=$objj->fetchdata($data);
   </div>
 </div>
 <div class="dropdown d-block mb-5 mt-5">
-  <button class="btn btn-secondary dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <button class="btn btn-outline-success dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   <i class="fa fa-map-marker" style="font-size:20px;color:rgb(10, 10, 10);"></i> &nbsp;Location
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -97,7 +107,7 @@ $out=$objj->fetchdata($data);
   </div>
 </div>
 <div class="dropdown d-block mb-5 mt-5">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   <i class="fa fa-user-circle-o" style="font-size:20px;color:rgb(10, 10, 10);"></i> &nbsp;Account
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -105,4 +115,4 @@ $out=$objj->fetchdata($data);
   </div>
 </div>
 </div>
-      <div class="col-sm-9">
+      <div class="col-sm-10">

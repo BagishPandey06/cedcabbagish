@@ -22,7 +22,8 @@ if (isset($_POST['submit'])) {
     $mobile=isset($_POST['mobile'])?$_POST['mobile']:'';
     if ($password != $repassword) {
         echo "<script>alert('password doesnt match1');</script>";
-        return false;
+        return ;
+       
     } else {
          $pass=md5($password);
     }

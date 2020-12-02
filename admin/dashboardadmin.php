@@ -11,6 +11,20 @@
 require 'headeradmin.php';
 
 ?>
+<!-- filter -->
+<section id="fs">
+      <select class="form-control filter" style="width:10rem">
+        <option>filter by</option>
+        <option value="week">Last 7 Days</option>
+        <option value="month">Last 30 days</option>
+        </select>
+        <select class="form-control sort" style="width:10rem">
+        <option>sort by</option>
+        <option value="ridedate">Ride date</option>
+        <option value="fare">Fare</option>
+        </select>
+</section>
+<!-- end filter -->
 <!-- admin home -->
 <section id="homeadmin">
 <div class="container-fluid">
@@ -150,20 +164,7 @@ require 'headeradmin.php';
   </section>
   <!-- end Accepted user -->
 
-<!-- filter -->
-<section id="fs">
-<select class="form-control filter" style="width:10rem">
-        <option>filter by</option>
-        <option value="week">Week</option>
-        <option value="month">Month</option>
-        </select>
-        <select class="form-control sort" style="width:10rem">
-        <option>sort by</option>
-        <option value="ridedate">Ride date</option>
-        <option value="fare">Fare</option>
-        </select>
-        </section>
-<!-- end filter -->
+
 
   <!-- pending ride -->
   <section id='pendride'></section>
@@ -173,8 +174,27 @@ require 'headeradmin.php';
   <!-- completed ride -->
   <section id='completride'></section>
   <!-- end completed ride -->
+  
 
+  <section id="bill">
+            
 
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">INVOICE</h5>  
+                  </div>
+                  <div class="modal-body">
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="printinvoice('exampleModal')"data-dismiss="modal">PRINT</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+                </section>
   <!-- Cancelled ride -->
   <section id='canride'></section>
   <!-- end Cancelled ride -->
@@ -189,22 +209,24 @@ require 'headeradmin.php';
   <section id="locationsec">
   </section>
   <!-- location ends -->
-  
+  <section id="edlocation">
+                     
+  </section>
   
   <!-- add location -->
   <section id="addlocation">
                       <form method="post">
                         <div class="form-group">
-                          <label for="exampleInputEmail1">LOCATION NAME</label>
-                          <input type="text" class="form-control" style="width: 25rem;" id="locationa" >
+                          <label for="exampleInputEmail1" class="font-wegiht-bold">LOCATION NAME</label>
+                          <input type="text" class="form-control"  id="locationa" >
                         </div>
                         <div class="form-group">
-                          <label for="dsitance">Distance From Charbagh</label>
-                          <input type="NUMBER" class="form-control" style="width: 25rem;" id="distance">
+                          <label for="dsitance" class="font-wegiht-bold">Distance From Charbagh</label>
+                          <input type="NUMBER" class="form-control"  id="distance">
                         </div>
                         <div class="form-group">
-                          <label for="avilabilty">service avilable</label>
-                          <select class="form-control" id="avilable" style="width: 25rem;">
+                          <label for="avilabilty" class="font-wegiht-bold">service avilable</label>
+                          <select class="form-control" id="avilable" >
                             <option value="1">Avilable</option>
                             <option value="0">Not-avilable</option>
                           </select>
@@ -221,16 +243,19 @@ require 'headeradmin.php';
 
   <!-- change password form -->
 <section id="chngadminpass">
+<div class="container">
+<div class="row">
+<div class="col-sm-4 ml-5 bg-light">
 <form action="" method="POST">
                 <p>
-                    <label for="old password">old Password:<br>
-                    <input type="password" name="pass" id="op"
-                    value=""required>
+                    <label for="old password" class="font-wegiht-bold">Old Password:<br>
+                    <input type="password" class="form-control" name="pass" id="op"
+                    value="" required>
                     </label>
                 </p>
                 <p>
-                    <label for="new password">New Password:<br>
-                        <input type="password" name="newpass" id="np"
+                    <label for="new password" class="font-wegiht-bold">New Password:<br>
+                        <input type="password" class="form-control" name="newpass" id="np"
                         value="" required>
                     </label>
                 </p>
@@ -239,6 +264,9 @@ require 'headeradmin.php';
                     <input type="button" name="submit" class="btn btn-warning" id="chngpass" value="SUBMIT">
                 </p>
             </form>
+            </div>
+            </div>
+            </div>
 </section>
 <!-- end change password form -->
  

@@ -9,6 +9,7 @@
  * @link     http://localhost/training/taskmy/register.php?
  */
 require 'loginop.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,36 +38,49 @@ require 'loginop.php';
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="navbar-nav ml-auto mr-3 ht text-right">
-
+      <ul class="navbar-nav ml-auto mr-3 ht text-right font-wegiht-bold">
+      <li class="nav-item">
+             <a class="nav-link pt-3" href="#">Features</a>
+             
+           </li>
+           <li class="nav-item">
+             <a class="nav-link pt-3" href="index.php">Book Now</a>
+           </li>
+           <li class="nav-item">
+             <a class="nav-link pt-3" href="#">Reviews</a>
+           </li>
+           <?php if(!empty($_SESSION['ridedata'])) :?>
+            <li class="nav-item">
+             <a class="nav-link pt-3" href="index.php"><i class="fa fa-reply" style="font-size:36px"></i></a>
+           </li>
+           <?php endif;?>
       </ul>
     </div>
   </nav>
   <section>
   <div class="container p-0 m-0">
   <div class="row">
+  <div class="col-sm-4"></div>
   <div class="col-sm-4 ">
   <article id="login">
-  <form action="" method="POST">
+  <form action="" class="p-5 bg-light mb-3"method="POST">
+  <h1 class="text-center text-success">Login Here</h1>
   <div class="form-group">
     <label for="username">Username</label>
-    <input type="email" name="username" required style="width:20rem;">
+    <input type="email" class="form-control" name="username" required >
   </div>
   <div class="form-group">
     <label for="Password">Password</label>
-    <input type="password" name="password" required style="width:20rem;">
+    <input type="password" class="form-control" name="password" required >
   </div>
   <div class="form-group form-check">
     <input type="checkbox" name="rem" class="form-check-input" id="s">
     <label class="form-check-label" for="exampleCheck1">Check me out</label>
   </div>
-  <button type="submit" name="submit" class="btn d-block" style="width:20rem;">Submit</button>
-  <span>Dont have account?</span><a href="signin.php" class="btn mt-3 btn-warning">signin</a>
+  <button type="submit" name="submit" class="btn btn-outline-success d-block" >Submit</button>
+  <span class="pt-2">Dont have account?</span><a href="signin.php" class="btn mt-3 btn-outline-warning">SIGN UP</a>
 </form>
   </article>
-  </div>
-  <div class="col-sm-8" id="limg">
-  
   </div>
   </div>
   </div>

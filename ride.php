@@ -244,7 +244,13 @@ if ($cab=="CedMicro") {
          $cost=(int)$cost+(int)$fixed;
          echo $cost;
          $_SESSION['ridedata']=array(
-            'pick'=>$pick,'drop'=>$drop,'cab'=>$cab,'cost'=>$cost,'kg'=>$kg ,'distance'=>$distance);
-           
+            'pick'=>$pick,
+            'drop'=>$drop,
+            'cab'=>$cab,
+            'cost'=>$cost,
+            'kg'=>$kg ,
+            'distance'=>$distance);
+            
     }
+    //session_destroy();
     ?>

@@ -5,7 +5,8 @@ $(document).ready(function () {
   var cab="cu";
   var kg=0;
     var cab;
-    $(".book").hide();
+    
+   
     $("#pick").change(function(){
         pick=$(this).val();
         
@@ -57,9 +58,9 @@ $(document).ready(function () {
                  kg:kg
             },
             success: function (result) {
-                $("#res").html(result);
+                window.location.href="index.php";
+
             }
         });
-        $(".book").show();
       });
     });

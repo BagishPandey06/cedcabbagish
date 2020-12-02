@@ -1,54 +1,33 @@
 $(document).ready(function () {
     var filter;
-    $("#locationsec").hide();
-    $("#addlocation").hide();
-    $("#alluser").hide();
-    $("#allride").hide();
-    $("#penduser").hide();
-    $("#pendride").hide();
-    $("#acptuser").hide();
-    $("#completride").hide();
-    $("#canride").hide();
-    $("#fs").hide();
+    $('#fs').hide();
     $("#chngadminpass").hide();
-
-    $(document).on("click", "#home", function () {
-        $("#locationsec").hide();
+        $("#edlocation").hide();
         $("#addlocation").hide();
-        $("#alluser").hide();
-        $("#allride").hide();
-        $("#penduser").hide();
-        $("#pendride").hide();
-        $("#acptuser").hide();
-        $("#completride").hide();
-        $("#chngadminpass").hide();
-        $("#canride").hide();
+    $(document).on("click", "#home", function () {  
         $("#homeadmin").show();
-        $("#fs").hide();
+        $('#fs').hide();
+        $("#chngadminpass").hide();
+        $("#edlocation").hide();
+        $("#addlocation").hide();
     });
     //.........................................ride section..............................................................//
     //pending rides 
     $(document).on("click", "#penride", function () {
-        $("#locationsec").hide();
-        $("#addlocation").hide();
-        $("#alluser").hide();
-        $("#allride").hide();
-        $("#penduser").hide();
-        $("#acptuser").hide();
+        $('#fs').hide();
         $("#chngadminpass").hide();
-        $("#completride").hide();
-        $("#canride").hide();
-        $("#homeadmin").hide();
-        $("#pendride").show();
-        $("#fs").hide();
+        $("#homeadmin").show();
+        $("#edlocation").hide();
+        $("#addlocation").hide();
+         
         showride();
 
     });
     function showride() {
 
-        html = ' <h1 class="text-center">pending rides</h1>\
+        html = ' <h1 class="text-center font-weight-bold">Pending Rides</h1>\
     <table class="table table-striped table-dark">\
-    <tr><td>Ridedate</td><td>From</td><td>To</td><td>Distance</td><td>Luggage<small>(kg)</small>\
+    <tr class="font-weight-bold table-primary text-dark"><td>Ridedate</td><td>From</td><td>To</td><td>Distance</td><td>Luggage<small>(kg)</small>\
     </td><td>Amount</td><td>Cab</td><td>Actions</td></tr>';
         var action = "getpenride";
         $.ajax({
@@ -69,7 +48,7 @@ $(document).ready(function () {
                     data-id='+ result[i]['rideid'] + '><i class="fa fa-trash" aria-hidden="true"></i></button></td></tr>';
                 }
                 html += '</table>';
-                $("#pendride").html(html);
+                $("#homeadmin").html(html);
             }
         });
     }
@@ -126,22 +105,14 @@ $(document).ready(function () {
 
     //Accepted ride
     $(document).on("click", "#compride", function () {
-        $("#locationsec").hide();
-        $("#addlocation").hide();
-        $("#alluser").hide();
-        $("#allride").hide();
-        $("#penduser").hide();
+        $('#fs').hide();
         $("#chngadminpass").hide();
-        $("#pendride").hide();
-        $("#acptuser").hide();
-        $("#completride").show();
-        $("#canride").hide();
-        $("#homeadmin").hide();
-        $("#fs").hide();
-
-        html = '<h1 class="text-center">completed rides</h1><table class="table table-striped table-dark">\
-        <tr><td>Ridedate</td><td>From</td><td>To</td><td>Distance</td><td>Luggage<small>(kg)</small></td>\
-        <td>Amount</td><td>Cab</td></tr>';
+        $("#homeadmin").show();
+        $("#edlocation").hide();
+        $("#addlocation").hide();
+        html = '<h1 class="text-center font-weight-bold">Completed Rides</h1><table class="table table-striped table-dark">\
+        <tr class="font-weight-bold table-success text-dark"><td>Ridedate</td><td>From</td><td>To</td><td>Distance</td><td>Luggage<small>(kg)</small></td>\
+        <td>Amount</td><td>Cab</td><td>Invoice print</td></tr>';
         var action = "compride";
         $.ajax({
             url: "trans.php",
@@ -156,34 +127,59 @@ $(document).ready(function () {
                     html += '<tr><td>' + result[i]['ridedate'] + '</td><td>' + result[i]['froml'] + '</td><td>' +
                         result[i]['tol'] + '</td><td>' + result[i]['totaldistance'] + '</td><td>' +
                         result[i]['luggage'] + '</td><td>' + result[i]['totalefare'] + '</td><td>' + result[i]['cab'] +
-                        '</td></tr>';
+                        '</td><td><button class="btn btn-outline-success pl-3 invoicead" data-toggle="modal" data-target="#exampleModal"  data-id='+ result[i]['rideid'] + '>\
+                        <i class="fas fa-receipt " aria-hidden="true" ></i></button> </td></tr>';
                 }
                 html += '</table>';
-                $("#completride").html(html);
+                $("#homeadmin").html(html);
             }
         });
     });
 
     //end completed ride
-
+ //invoice
+ $(document).on("click",".invoicead",function () {
+    //$('#fs').hide();
+    var action = "invoice";
+    var id=$(this).data('id');
+    $.ajax({
+        url: "trans.php",
+        type: "post",
+        data: {
+            id:id,
+            action: action
+        },
+        dataType: "json",
+        success: function (result) {
+            var htmll='';
+          for(var i=0;i<result.length;i++)
+          {
+                htmll+='<table class="table"><tr>\
+                <td>RIDE DATE</td><td>' + result[i]['ridedate'] + '</td></tr>\
+                <tr><td>FROM</td><td>' + result[i]['froml'] + '</td></tr>\
+                <tr><td>TO</td><td>' +result[i]['tol'] + '</td></tr>\
+                <tr><td>TOTAL Distance</td><td>'+ result[i]['totaldistance'] + '</td></tr>\
+                <tr><td>TOTAL luggage</td><td>' +result[i]['luggage'] + '</td></tr>\
+                <tr><td>TOTAL fare</td><td>'+ result[i]['totalefare'] + '</td></tr>\
+                <tr><td>CAB TYPE</td><td>' + result[i]['cab'] +'</td></tr></table>';
+            
+            // htmll += '</table>';
+            $(".modal-body").html(htmll);
+         }
+    }
+});
+});
+//end invoice
 
     //Canceled ride
     $(document).on("click", "#cancelride", function () {
-        $("#locationsec").hide();
-        $("#addlocation").hide();
-        $("#alluser").hide();
-        $("#allride").hide();
-        $("#penduser").hide();
+        $('#fs').hide();
+        $("#homeadmin").show();
+        $("#edlocation").hide();
         $("#chngadminpass").hide();
-        $("#pendride").hide();
-        $("#acptuser").hide();
-        $("#completride").hide();
-        $("#canride").show();
-        $("#homeadmin").hide();
-        $("#fs").hide();
-
-        html = '<h1 class="text-center">canceled rides</h1><table class="table table-striped table-dark">\
-        <tr><td>Ridedate</td><td>From</td><td>To</td><td>Distance</td><td>Luggage<small>(kg)</small></td>\
+        $("#addlocation").hide();
+        html = '<h1 class="text-center font-weight-bold">Canceled Rides</h1><table class="table table-striped table-dark">\
+        <tr class="font-weight-bold table-danger text-dark"><td>Ridedate</td><td>From</td><td>To</td><td>Distance</td><td>Luggage<small>(kg)</small></td>\
         <td>Amount</td><td>Cab</td></tr>';
         var action = "canride";
         $.ajax({
@@ -202,7 +198,7 @@ $(document).ready(function () {
                         '</td></tr>';
                 }
                 html += '</table>';
-                $("#canride").html(html);
+                $("#homeadmin").html(html);
             }
         });
     });
@@ -212,22 +208,15 @@ $(document).ready(function () {
 
     //show all rides
     $(document).on("click", "#rideb", function () {
-        $("#locationsec").hide();
-        $("#addlocation").hide();
-        $("#alluser").hide();
-        $("#allride").show();
-        $("#penduser").hide();
+        $('#fs').show();
         $("#chngadminpass").hide();
-        $("#pendride").hide();
-        $("#acptuser").hide();
-        $("#completride").hide();
-        $("#canride").hide();
-        $("#homeadmin").hide();
-        $("#fs").show();
-        html = '<h1 class="text-center">All rides</h1>\
+        $("#homeadmin").show();
+        $("#edlocation").hide();
+        $("#addlocation").hide();
+        html = '<h1 class="text-center font-weight-bold">All rides</h1>\
         <table class="table table-striped table-dark">\
-    <tr><td>Ridedate</td><td>From</td><td>To</td><td>Distance</td><td>Luggage<small>(kg)</small></td><td>Amount</td>\
-    <td>Cab</td></tr>';
+    <tr class="font-weight-bold table-light text-dark"><td>Ridedate</td><td>From</td><td>To</td><td>Distance</td><td>Luggage<small>(kg)</small></td><td>Amount</td>\
+    <td>Cab</td><td>status</td></tr>';
         var action = "getride";
         $.ajax({
             url: "trans.php",
@@ -239,12 +228,19 @@ $(document).ready(function () {
             success: function (result) {
                 //alert(result);
                 for (var i = 0; i < result.length; i++) {
+                    if (result[i]['status'] == 0) {
+                        status = '<td class="text-warning">pending..<i class="fa fa-spinner fa-spin" style="font-size:24px"></i></td>';
+                    } else if (result[i]['status'] == 1) {
+                        status = '<td class="text-success">Completed !<i class="fa fa-check-circle" style="font-size:36px;color:green"></i></td>';
+                    } else {
+                        status = '<td class="text-danger">Cancle</td>';
+                    }
                     html += '<tr><td>' + result[i]['ridedate'] + '</td><td>' + result[i]['froml'] + '</td><td>' + result[i]['tol'] + '</td><td>'
                         + result[i]['totaldistance'] + '</td><td>' + result[i]['luggage'] + '</td><td>'
-                        + result[i]['totalefare'] + '</td><td>' + result[i]['cab'] + '</td></tr>';
+                        + result[i]['totalefare'] + '</td><td>' + result[i]['cab'] + '</td>'+status+'</tr>';
                 }
                 html += '</table>';
-                $("#allride").html(html);
+                $("#homeadmin").html(html);
             }
         });
 
@@ -252,23 +248,16 @@ $(document).ready(function () {
     //show all rides ends
     //filter by
     $(document).on("change",".filter",function(){
-        $("#locationsec").hide();
-        $("#addlocation").hide();
-        $("#alluser").hide();
-        $("#allride").show();
-        $("#penduser").hide();
+        $('#fs').show();
         $("#chngadminpass").hide();
-        $("#pendride").hide();
-        $("#acptuser").hide();
-        $("#completride").hide();
-        $("#canride").hide();
-        $("#homeadmin").hide()
-        $("#fs").show();
+        $("#homeadmin").show();
+        $("#edlocation").hide();
+        $("#addlocation").hide();
         filter=$(this).val();
-        html = '<h1 class="text-center">All rides</h1>\
+        html = '<h1 class="text-center font-weight-bold">All Rides</h1>\
         <table class="table table-striped table-dark">\
-    <tr><td>Ridedate</td><td>From</td><td>To</td><td>Distance</td><td>Luggage<small>(kg)</small></td><td>Amount</td>\
-    <td>Cab</td></tr>';
+    <tr class="font-weight-bold table-light text-dark"><td>Ridedate</td><td>From</td><td>To</td><td>Distance</td><td>Luggage<small>(kg)</small></td><td>Amount</td>\
+    <td>Cab</td><td>status</td></tr>';
         var action = "getfilterride";
         $.ajax({
             url: "trans.php",
@@ -279,36 +268,37 @@ $(document).ready(function () {
             },
             dataType: "json",
             success: function (result) {
+               
                 for (var i = 0; i < result.length; i++) {
+                    if (result[i]['status'] == 0) {
+                        status = '<td class="text-warning">pending..<i class="fa fa-spinner fa-spin" style="font-size:24px"></i></td>';
+                    } else if (result[i]['status'] == 1) {
+                        status = '<td class="text-success">Completed !<i class="fa fa-check-circle" style="font-size:36px;color:green"></i></td>';
+                    } else {
+                        status = '<td class="text-danger">Cancle</td>';
+                    }
                     html += '<tr><td>' + result[i]['ridedate'] + '</td><td>' + result[i]['froml'] + '</td><td>' + result[i]['tol'] + '</td><td>'
                         + result[i]['totaldistance'] + '</td><td>' + result[i]['luggage'] + '</td><td>'
-                        + result[i]['totalefare'] + '</td><td>' + result[i]['cab'] + '</td></tr>';
+                        + result[i]['totalefare'] + '</td><td>' + result[i]['cab'] + '</td>'+status+'</tr>';
                 }
                 html += '</table>';
-                $("#allride").html(html);
+                $("#homeadmin").html(html);
             }
         });
       });
     //end filter by
     //sort by
     $(document).on("change",".sort",function(){
-        $("#locationsec").hide();
-        $("#addlocation").hide();
-        $("#alluser").hide();
-        $("#allride").show();
-        $("#penduser").hide();
+        $('#fs').show();
         $("#chngadminpass").hide();
-        $("#pendride").hide();
-        $("#acptuser").hide();
-        $("#completride").hide();
-        $("#canride").hide();
-        $("#homeadmin").hide()
-        $("#fs").show();
+        $("#homeadmin").show();
+        $("#edlocation").hide();
+        $("#addlocation").hide();
         sort=$(this).val();
-        html = '<h1 class="text-center">All rides</h1>\
+        html = '<h1 class="text-center font-weight-bold">All Rides</h1>\
         <table class="table table-striped table-dark">\
-    <tr><td>Ridedate</td><td>From</td><td>To</td><td>Distance</td><td>Luggage<small>(kg)</small></td><td>Amount</td>\
-    <td>Cab</td></tr>';
+    <tr class="font-weight-bold table-light text-dark"><td>Ridedate</td><td>From</td><td>To</td><td>Distance</td><td>Luggage<small>(kg)</small></td><td>Amount</td>\
+    <td>Cab</td><td>status</td></tr>';
         var action = "getsortride";
         $.ajax({
             url: "trans.php",
@@ -319,13 +309,21 @@ $(document).ready(function () {
             },
             dataType: "json",
             success: function (result) {
+                
                 for (var i = 0; i < result.length; i++) {
+                    if (result[i]['status'] == 0) {
+                        status = '<td class="text-warning">pending..<i class="fa fa-spinner fa-spin" style="font-size:24px"></i></td>';
+                    } else if (result[i]['status'] == 1) {
+                        status = '<td class="text-success"><span>Completed !<i class="fa fa-check-circle" style="font-size:36px;color:green"></i></span></td>';
+                    } else {
+                        status = '<td class="text-danger">Cancle</td>';
+                    }
                     html += '<tr><td>' + result[i]['ridedate'] + '</td><td>' + result[i]['froml'] + '</td><td>' + result[i]['tol'] + '</td><td>'
                         + result[i]['totaldistance'] + '</td><td>' + result[i]['luggage'] + '</td><td>'
-                        + result[i]['totalefare'] + '</td><td>' + result[i]['cab'] + '</td></tr>';
+                        + result[i]['totalefare'] + '</td><td>' + result[i]['cab'] + '</td>'+status+'</tr>';
                 }
                 html += '</table>';
-                $("#allride").html(html);
+                $("#homeadmin").html(html);
             }
         });
       });
@@ -335,23 +333,17 @@ $(document).ready(function () {
 
     //pending user
     $(document).on("click", "#penuser", function () {
-        $("#locationsec").hide();
-        $("#addlocation").hide();
-        $("#alluser").hide();
-        $("#allride").hide();
-        $("#pendride").hide();
-        $("#acptuser").hide();
+        $('#fs').hide();
         $("#chngadminpass").hide();
-        $("#completride").hide();
-        $("#canride").hide();
-        $("#homeadmin").hide();
-        $("#penduser").show();
-        $("#fs").hide();
+        $("#homeadmin").show();
+        $("#edlocation").hide();
+        $("#addlocation").hide();
         showdata();
 
     });
     function showdata() {
-        html = '<h1 class="text-center">pending user</h1><table class="table table-striped table-dark"><tr><td>username</td>\
+        html = '<h1 class="text-center font-weight-bold">Pending User</h1>\
+        <table class="table table-striped table-dark"><tr class="font-weight-bold table-warning text-dark"><td>username</td>\
         <td>name</td><td>mobile</td><td>Date of sign up</td> <td>ACTION</td></tr>';
         var action = "getpenuser";
         $.ajax({
@@ -371,7 +363,7 @@ $(document).ready(function () {
                       data-id='+ result[i]['userid'] + '><i class="fa fa-trash" aria-hidden="true"></i></button></td></tr>';
                 }
                 html += '</table>';
-                $("#penduser").html(html);
+                $("#homeadmin").html(html);
             }
         });
     }
@@ -426,20 +418,13 @@ $(document).ready(function () {
 
     //Accepted user
     $(document).on("click", "#acptuserb", function () {
-        $("#locationsec").hide();
-        $("#addlocation").hide();
-        $("#alluser").hide();
-        $("#allride").hide();
+        $('#fs').hide();
         $("#chngadminpass").hide();
-        $("#penduser").hide();
-        $("#pendride").hide();
-        $("#acptuser").show();
-        $("#completride").hide();
-        $("#canride").hide();
-        $("#homeadmin").hide();
-        $("#fs").hide();
-
-        html = '<h1 class="text-center">Accepted users</h1><table class="table table-striped table-dark"><tr><td>username</td>\
+        $("#homeadmin").show();
+        $("#edlocation").hide();
+        $("#addlocation").hide();
+        html = '<h1 class="text-center font-weight-bold">Accepted users</h1>\
+        <table class="table table-striped table-dark"><tr class="font-weight-bold table-success text-dark"><td>username</td>\
         <td>name</td><td>mobile</td><td>Date of sign up</td></tr>';
         var action = "getacptuser";
         $.ajax({
@@ -457,7 +442,7 @@ $(document).ready(function () {
                         '</td></tr>';
                 }
                 html += '</table>';
-                $("#acptuser").html(html);
+                $("#homeadmin").html(html);
             }
         });
     });
@@ -467,21 +452,15 @@ $(document).ready(function () {
 
     // show all users
     $(document).on("click", "#alluserb", function () {
-        $("#locationsec").hide();
-        $("#addlocation").hide();
-        $("#alluser").show();
+        $('#fs').hide();
+        //$('#fs').hide();
         $("#chngadminpass").hide();
-        $("#allride").hide();
-        $("#penduser").hide();
-        $("#pendride").hide();
-        $("#acptuser").hide();
-        $("#completride").hide();
-        $("#canride").hide();
-        $("#homeadmin").hide();
-        $("#fs").hide();
-
-        html = '<h1 class="text-center">All user</h1><table class="table table-striped table-dark"><tr><td>username</td>\
-        <td>name</td><td>mobile</td><td>Date of sign up</td></tr>';
+        $("#homeadmin").show();
+        $("#edlocation").hide();
+        $("#addlocation").hide();
+        html = '<h1 class="text-center font-weight-bold">All user</h1>\
+        <table class="table table-striped table-dark"><tr class="font-weight-bold table-light text-dark"><td>username</td>\
+        <td>name</td><td>mobile</td><td>Date of sign up</td><td>status</td></tr>';
         var action = "getuser";
         $.ajax({
             url: "trans.php",
@@ -493,12 +472,16 @@ $(document).ready(function () {
             success: function (result) {
                 //alert(result);
                 for (var i = 0; i < result.length; i++) {
+                    if (result[i]['isblock'] == 0) {
+                        status = '<td class="text-danger">block..<i class="fa fa-ban" style="font-size:24px"></i></td>';
+                    } else if (result[i]['isblock'] == 1) {
+                        status = '<td class="text-success">unblocked !<i class="fa fa-check-circle" style="font-size:24px;color:green"></i></td>';
+                    } 
                     html += '<tr><td>' + result[i]['username'] + '</td><td>' + result[i]['name'] +
-                        '</td><td>' + result[i]['mobile'] + '</td><td>' + result[i]['dateofsignup'] + '</td>\
-                     </tr>';
+                        '</td><td>' + result[i]['mobile'] + '</td><td>' + result[i]['dateofsignup'] + '</td>'+status+'</tr>';
                 }
                 html += '</table>';
-                $("#alluser").html(html);
+                $("#homeadmin").html(html);
             }
         });
 
@@ -510,22 +493,19 @@ $(document).ready(function () {
 
     //show location
     $(document).on("click", "#location", function() {
-        
-        $("#addlocation").hide();
-        $("#alluser").hide();
-        $("#allride").hide();
-        $("#penduser").hide();
-        $("#pendride").hide();
-        $("#acptuser").hide();
-        $("#completride").hide();
-        $("#canride").hide();
+        $('#fs').hide();
         $("#chngadminpass").hide();
-        $("#homeadmin").hide();
-        $("#fs").hide();
-        $("#locationsec").show();
-        html = '<h1 class="text-center">Location</h1><table class="table table-striped table-dark">\
-        <tr><td>location</td><td>distance</td><td>avilable</td>\
-        <td>ACtIoN</td></tr>';
+        $("#homeadmin").show();
+        $("#edlocation").hide();
+        $("#addlocation").hide();
+        
+    location();
+
+    });
+    function location(){
+        html = '<h1 class="text-center font-weight-bold">Location</h1><table class="table table-striped table-dark">\
+        <tr class="font-weight-bold table-success text-dark"><td>Location</td><td>Distance</td><td>Avilable</td>\
+        <td>Action</td></tr>';
         var action = "getloc";
         $.ajax({
             url: "trans.php",
@@ -538,41 +518,107 @@ $(document).ready(function () {
                 //alert(result);
                 for (var i = 0; i < result.length; i++) {
                     html += '<tr><td>' + result[i]['name'] + '</td><td>' + result[i]['distance'] + '</td><td>' + result[i]['isavilable'] +
-                        '</td><td><button class="btn btn-info mr-3" data-id=' + result[i]['id'] + '><i class="fa fa-pencil-square-o" aria-hidden="true"></i>\
-                    </button><button class="btn btn-danger pl-3" data-id='+ result[i]['id'] + '><i class="fa fa-trash" aria-hidden="true"></i>\
+                        '</td><td><button class="btn btn-outline-info pl-3 mr-2 editlocation" data-id='+ result[i]['id'] + '><i class="fa fa-edit" aria-hidden="true"></i>\
+                        </button><button class="btn btn-outline-danger pl-3" data-id='+ result[i]['id'] + '><i class="fa fa-trash" aria-hidden="true"></i>\
                     </button></td></tr>';
                 }
                 html += '</table>';
-                $("#locationsec").html(html);
+                $("#homeadmin").html(html);
             }
         });
-
-    });
+    }
     //show location ends
+    $(document).on("click",".editlocation",function () {
+        $('#fs').hide();
+        $("#chngadminpass").hide();
+        $("#addlocation").hide();
+        $("#edlocation").hide();
+        
+        $("#homeadmin").show();
+       
+        html='<form method="post">';
+        var id = $(this).data('id');
+        var action = "editloc";
+        $.ajax({
+            url: "trans.php",
+            type: "post",
+            data: {
+                id:id,
+                action: action
+            },
+            dataType: "json",
+            success: function (result) {
+                //alert(result);
+                for (var i = 0; i < result.length; i++) {
+                    html += ' <div class="form-group">\
+                      <label for="exampleInputEmail1" class="font-wegiht-bold">LOCATION NAME</label>\
+                      <input type="text" class="form-control"  id="locatione" value="'+result[i]['name']+'"  disabled>\
+                    </div>\
+                    <div class="form-group">\
+                      <label for="dsitance" class="font-wegiht-bold">Distance From Charbagh</label>\
+                      <input type="NUMBER" class="form-control"  id="distancee" value="'+result[i]['distance']+'">\
+                    </div>\
+                    <div class="form-group">\
+                      <label for="avilabilty" class="font-wegiht-bold">service avilable</label>\
+                      <select class="form-control" id="avilablee" >\
+                        <option value="1">Avilable</option>\
+                        <option value="0">Not-avilable</option>\
+                      </select>\
+                    </div>\
+                    <input type="button" class="btn btn-primary uploc" data-id='+ result[i]['id'] + ' value="update">';
+                }
+                html += '</form>';
+                $("#homeadmin").html(html);
+            }
+        });
+    });
+    $(document).on("click",".uploc",function () {
+        var avi;
+        var id = $(this).data('id');
+        avi = $("#avilablee").val();
+        var action = "uploc";
+        $.ajax({
 
+            url: "trans.php",
+            type: "post",
+            data: {
+                id,id,
+                avi, avi,
+                action: action
+            },
+            success: function (result) {
 
+                alert("location updated succesfully");
+                $("#locatione").val('');
+                $("#distancee").val('');
+                
+                
+            }
+        });
+    });
     //add location
     $(document).on("click","#alocation",function () {
-        $("#locationsec").hide();
-        $("#addlocation").show();
-        $("#alluser").hide();
-        $("#allride").hide();
-        $("#penduser").hide();
-        $("#pendride").hide();
-        $("#acptuser").hide();
-        $("#completride").hide();
-        $("#canride").hide();
         $("#homeadmin").hide();
-        $("#chngadminpass").hide();
         $("#fs").hide();
+        $("#chngadminpass").hide();
+        $("#addlocation").show();
+        
 
     });
     $(document).on("click", "#Add", function () {
         var location;
         var distance;
         var avi;
-        location = $("#locationa").val();
-        distance = $("#distance").val();
+if($("#locationa").val()==''){
+    alert("enter location ");
+    return false;
+}else {
+        location = $("#locationa").val();}
+if($("#distance").val()==''){
+            alert("enter distance ");
+            return false;
+        } else {
+        distance = $("#distance").val();}
         avi = $("#avilable").val();
         var action = "insertloc";
         $.ajax({
@@ -596,18 +642,11 @@ $(document).ready(function () {
 
     //.........................................change admin section..............................................................//
     $(document).on("click","#adminpass", function () {
-        $("#locationsec").hide();
-        $("#addlocation").hide();
-        $("#alluser").hide();
-        $("#allride").hide();
-        $("#penduser").hide();
-        $("#pendride").hide();
-        $("#acptuser").hide();
-        $("#completride").hide();
-        $("#canride").hide();
+        $('#fs').hide();
         $("#homeadmin").hide();
-        $("#fs").hide();
-        $("#chngadminpass").show();
+        $("#edlocation").hide();
+        $("#addlocation").hide();
+         $("#chngadminpass").show();
     });
     $(document).on("click","#chngpass",function () {
         var old;

@@ -65,9 +65,9 @@
     font-size: 10px;
     width: 75px;
   }
-  .btn{
+  /* .btn{
     background-color: greenyellow;
-  }
+  } */
   .ced{
   color: rgb(2, 66, 61);
   font-weight: bold;
@@ -78,6 +78,9 @@
   
   }
   .btn1{
+    background-color:yellowgreen ;
+  }
+  .btn2{
     background-color:yellowgreen ;
   }
   

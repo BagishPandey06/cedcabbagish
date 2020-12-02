@@ -36,6 +36,29 @@ class Admin
         }
        
     }
+    public function uploc($avi, $id, $data) 
+    {
+        $sql = "UPDATE `location` SET `isavilable`=$avi WHERE `id`=$id";
+        if ($data->query($sql) === true) {
+            $out="inserted";
+        } else {
+            $out="sory";
+        }
+        return $out;
+       
+    }
+    public function editloc($id, $data) 
+    {
+        $sql = "SELECT * FROM location where `id`=$id";
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            while ($row=$res->fetch_assoc()) {
+                $this->rows[]=$row;
+            }
+            return json_encode($this->rows);
+        }
+       
+    }
     public function getuser($data) 
     {
         $sql = "SELECT * FROM user";
@@ -215,7 +238,7 @@ class Admin
     }
     public function getfilterridem($data)
     {
-            $sql="SELECT *FROM ride WHERE MONTH(`ridedate`)=MONTH(DATE_ADD(NOW(),INTERVAL-1 MONTH)) ORDER BY `ridedate` ";
+            $sql="SELECT *FROM ride Where `ridedate` > DATE_SUB(NOW(),INTERVAL 30 DAY) ORDER BY `ridedate`";
 
         $res=$data->query($sql);
         if ($res->num_rows > 0) {
@@ -242,7 +265,7 @@ class Admin
     public function getsortf($data)
     {
         
-        $sql="SELECT *FROM ride order by `totalefare` desc  ";
+        $sql="SELECT * FROM ride ORDER BY `totalefare` DESC";
         $res=$data->query($sql);
         if ($res->num_rows > 0) {
             while ($row=$res->fetch_assoc()) {
@@ -276,6 +299,18 @@ class Admin
             }
               return $out;
         } 
+    }
+    public function invoice($id, $data) 
+    {
+        $sql = "SELECT * FROM ride where`rideid`='$id'";
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            while ($row=$res->fetch_assoc()) {
+                $this->rows[]=$row;
+            }
+            return json_encode($this->rows);
+        }
+       
     }
 }
 ?>

@@ -43,7 +43,11 @@ case 'compride':
 case 'allride':
      $out=$obj->allride($userid, $data);
      print_r($out);
-    break;  
+    break; 
+case 'canc':
+     $out=$obj->can($userid, $data);
+     print_r($out);
+     break; 
 case 'pass':
      $newp=$_POST['newp'];
      $old=$_POST['old'];

@@ -160,7 +160,7 @@
     }
     public function getusrloc($data)
     {
-        $sql = "SELECT `name`,`distance` FROM location";
+        $sql = "SELECT `name`,`distance` FROM location where `isavilable`=1";
         $res=$data->query($sql);
         if ($res->num_rows > 0) {
             while ($row=$res->fetch_assoc()) {
@@ -194,6 +194,18 @@
     public function compride($userid, $data) 
     {
         $sql = "SELECT * FROM ride where`userid`='$userid' and `status`=1";
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            while ($row=$res->fetch_assoc()) {
+                $this->rows[]=$row;
+            }
+            return json_encode($this->rows);
+        }
+       
+    }
+    public function can($userid, $data) 
+    {
+        $sql = "SELECT * FROM ride where`userid`='$userid' and `status`=2";
         $res=$data->query($sql);
         if ($res->num_rows > 0) {
             while ($row=$res->fetch_assoc()) {
