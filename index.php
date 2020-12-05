@@ -9,6 +9,7 @@
  * @link     http://localhost/training/taskmy/logout.php
  */
 session_start();
+//print_r($_SESSION['ridedata']);
 require 'Config.php';
 require 'user.php';
 $obj =new Config();
@@ -26,22 +27,14 @@ $out=$obj->getusrloc($data);
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js">
     </script>
     <link rel="stylesheet" type="text/css" href="rideindex.css">
     <script src="ride.js"></script>
-    <script>
-        function check() {
-            if ((event.keyCode > 47) && (event.keyCode < 58)) {
-                return true;
-            } else {
-                alert("Please enter numeric value only");
-                return false;
-            }
-        }
-    </script>
+   
     <title>BOOK A RIDE</title>
 </head>
 
@@ -56,7 +49,7 @@ $out=$obj->getusrloc($data);
             <ul class="navbar-nav text-right ml-auto mr-3 ht">
                 <?php if(empty($_SESSION['userdata']) ) :?>
                 <li class="nav-item">
-                    <a class="nav-link pt-3" href="#">FEATURES</a>
+                    <a class="nav-link pt-3" href="#">Features</a>
                     <section>
                         <div class="container">
                             <div class="row">
@@ -64,7 +57,7 @@ $out=$obj->getusrloc($data);
                     </section>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link pt-3" href="#">REVIEWS</a>
+                    <a class="nav-link pt-3" href="#">Reviews</a>
                 </li>
                 <li class="nav-item">
                     <a class="btn btn2 btn-info rounded-pill  mt-1 ml-3" href="login.php">SIGN-IN</a>
@@ -72,7 +65,7 @@ $out=$obj->getusrloc($data);
                 <?php 
     endif;?>
                 <?php if (!empty($_SESSION['userdata']) ) :?>
-
+               
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="userdashboard.php" id="navbarDropdown2">
                         <i class="fa fa-USER" style="font-size:20px;color:rgb(10, 10, 10);"></i>
@@ -82,8 +75,7 @@ $out=$obj->getusrloc($data);
                     <a class="btn btn-info rounded-pill  
         mt-1 ml-3 pr-3 pl-3" href="logout.php">logout</a>
                 </li>
-                <?php 
-            endif;?>
+                <?php endif;?>
             </ul>
     </nav>
 
@@ -145,12 +137,12 @@ $out=$obj->getusrloc($data);
                             </div>
 
 
-                            <div class="input-group mb-3">
+                            <div class="input-group mb-3 kg">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text ">Luggage</div>
                                 </div>
-                                <input type="NUMBER" onkeypress="return check()" class="form-control" id="kg"
-                                    placeholder="Enter Weghit in KG">
+                                <input type="NUMBER" class="form-control mob" id="kg"
+                                    onKeypress="return check()"placeholder="Enter Weghit in KG">
                             </div>
 
 
@@ -170,20 +162,25 @@ $out=$obj->getusrloc($data);
                     </div>
            
         
-       <?php if(!empty($_SESSION['ridedata'])) : ?>
-        <div class="col-sm-4 a ml-5">
-          <h1 class="text-center">INVOICE</h1>
+      
+        <div class="col-sm-4 a ml-5 rideinfo" >
+          <h1 class="text-center">Booking Details</h1>
         <table class="table">
-                <tr><td class="font-weight-bold">pick-up:</td><td><?php echo $_SESSION['ridedata']['pick'];?></td></tr>
-                <tr><td class="font-weight-bold">Drop:</td><td><?php echo $_SESSION['ridedata']['drop'];?></td></tr>
-                <tr><td class="font-weight-bold">CAB:</td><td><?php echo $_SESSION['ridedata']['cab'];?></td></tr>
-                <tr><td class="font-weight-bold">Luggage:</td><td><?php echo $_SESSION['ridedata']['kg'];?><small>kg</small></td></tr>
-                <tr><td class="font-weight-bold">Distance:</td><td><?php echo $_SESSION['ridedata']['distance'];?></td></tr>
-                <tr><td class="font-weight-bold">cost of ride:</td><td><?php echo $_SESSION['ridedata']['cost'];?></td></tr>
-                <tr><td class="font-weight-bold"><a class="btn  btn-outline-success " id="inlineFormInputGroup" href="check.php">BOOK NOW</a></td>
-              <td><a class="btn  btn-outline-danger " id="inlineFormInputGroup" href="cancel.php">CANCEL</a></td></tr></table>
+                <tr><td class="font-weight-bold ">Pick-Up:</td><td ><span class="pick font-italic"></span></td></tr>
+                <tr><td class="font-weight-bold ">Drop:</td><td ><span class="drop font-italic"></span></td></tr>
+                <tr><td class="font-weight-bold ">CAB:</td><td class="cab font-italic"></td></tr>
+                <tr><td class="font-weight-bold ">Luggage:</td><td ><span class="kgm font-italic"></span><small>kg</small></td></tr>
+                <tr><td class="font-weight-bold ">Distance:</td><td ><span class="dis font-italic"></span><small>km</small></td></tr>
+                <tr><td class="font-weight-bold ">Cost of Ride:</td>
+                <td ><i class="fa fa-inr" style='font-size:15px'></i><span class="cost font-italic"></span></td></tr>
+                <tr><td class="font-weight-bold"><a class="btn  btn-outline-success book" id="inlineFormInputGroup" >BOOK NOW</a></td>
+              <td><a class="btn  btn-outline-danger " id="cancel" >CANCEL</a></td></tr></table>
         </div>
-       <?php endif;?>
+     
+
+
+
+
         </div>
                                        
         </div>
@@ -216,6 +213,32 @@ $out=$obj->getusrloc($data);
             </div>
         </div>
     </div>
+    <script>
+        
+        $(".mob").keypress(function(event) {
+           var m=$(this).val();
+           if(m.length>=3){
+               alert("luggage is only allowed upto 999kg !");
+              return false;
+           } else {
+            return true;
+           }
+            var character = String.fromCharCode(event.keyCode);
+            return isValidm(character);     
+        });
+        function check(){
+            if(event.keyCode > 47 && event.keyCode < 58){
+                return true;
+            } else {
+                alert("Only Numeric  value allowed");
+                return false;
+            }
+        }
+        function isValidm(str) {
+            return !/[~`.-!@#$%\^&*()+=\\[\]\\';(a-z)(A-Z),/{}|\\":<>\?]/g.test(str);
+        }
+        
+            </script>
 </body>
 
 </html>

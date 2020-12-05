@@ -9,7 +9,25 @@
  * @link     http://localhost/training/taskmy/register.php?
  */
 require 'loginop.php';
+if (!empty($_SESSION['userdata'])) {
+    header('location:userdashboard.php');
+}
+$expireAfter = 1;
 
+if (isset($_SESSION['last_action'])) {
+    $secondsInactive = time() - $_SESSION['last_action'];
+    
+    //Convert our minutes into seconds.
+    $expireAfterSeconds = $expireAfter * 60;
+    
+    //Check to see if they have been inactive for too long.
+    if ($secondsInactive >= $expireAfterSeconds) {
+        session_unset();
+        session_destroy();
+    }
+    
+}
+$_SESSION['last_action']=time();
 ?>
 <!DOCTYPE html>
 <html lang="en">

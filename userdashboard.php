@@ -13,14 +13,33 @@ $userid=$_SESSION['userdata']['id'];
 $obj=new User();
 $out=$obj->get($userid, $data);
 ?>
+<!-- filter -->
+<section id="fs">
+<div class="row">
+<div class="col-sm-2 text-right">
+      <select class="form-control filter" style="width:10rem">
+        <option>All ride</option>
+        <option value="week">Last 7 Days</option>
+        <option value="month">Last 30 days</option>
+        </select></div><div class="col-sm-2">
+        <select class="form-control sort" style="width:10rem">
+        <option>sort by</option>
+        <option value="ridedate">Ride Date</option>
+        <option value="fare">Fare</option>
+        <option value="ridedatea">Ride Date(ascending)</option>
+        <option value="farea">Fare(ascending)</option>
+        </select></div>
+        </div>
+</section>
+<!-- end filter -->
 <!-- USER dasboard -->
 <section id="userdash">
 <div class="row  ml-5 text-dark text-center">
   <div class="col-sm-4 mt-3">
     <div class="card  bg-info" style="width :15rem;">
         <div class="card-header">
-            <h5 class="card-title">Total ride</h5>
-            <i class="fa fa-car" style="font-size:20px;color:rgb(10, 10, 10);"></i>
+            <h5 class="card-title font-weight-bolder">Total Ride</h5>
+            <i class="fa fa-car" style="font-size:45px;color:rgb(10, 10, 10);"></i>
         </div>
       <div class="card-body">
         <h1 class="card-text"><?php echo $out['b'];?></h1>
@@ -35,8 +54,8 @@ $out=$obj->get($userid, $data);
   <div class="col-sm-4 mt-3">
     <div class="card  bg-success" style="width :15rem;">
         <div class="card-header">
-            <h5 class="card-title">completed ride</h5>
-            <i class="fa fa-car" style="font-size:20px;color:rgb(10, 10, 10);"></i>
+            <h5 class="card-title font-weight-bolder">Completed Ride</h5>
+            <i class="fa fa-car" style="font-size:45px;color:rgb(10, 10, 10);"></i>
         </div>
       <div class="card-body">
         <h1 class="card-text"><?php echo $out['c'];?></h1>
@@ -48,8 +67,8 @@ $out=$obj->get($userid, $data);
   <div class="col-sm-4 mt-3">
     <div class="card  bg-warning" style="width :15rem;">
         <div class="card-header">
-            <h5 class="card-title">pending ride</h5>
-            <i class="fa fa-car" style="font-size:20px;color:rgb(10, 10, 10);"></i>
+            <h5 class="card-title font-weight-bolder">Pending Ride</h5>
+            <i class="fa fa-car" style="font-size:45px;color:rgb(10, 10, 10);"></i>
         </div>
       <div class="card-body">
         <h1 class="card-text"><?php echo $out['d'];?></h1>
@@ -63,8 +82,8 @@ $out=$obj->get($userid, $data);
   <div class="col-sm-4 mt-3">
     <div class="card  bg-danger" style="width :15rem;">
         <div class="card-header">
-            <h5 class="card-title">canceled ride</h5>
-            <i class="fa fa-car" style="font-size:20px;color:rgb(10, 10, 10);"></i>
+            <h5 class="card-title font-weight-bolder">Canceled Ride</h5>
+            <i class="fa fa-car" style="font-size:45px;color:rgb(10, 10, 10);"></i>
         </div>
       <div class="card-body">
         <h1 class="card-text"><?php echo $out['e'];?></h1>
@@ -76,8 +95,8 @@ $out=$obj->get($userid, $data);
   <div class="col-sm-4 mt-3">
     <div class="card  bg-secondary" style="width :15rem;">
         <div class="card-header">
-            <h5 class="card-title">Total money spent</h5>
-            <i class="fa fa-inr" style="font-size:20px;color:rgb(10, 10, 10);"></i>
+            <h5 class="card-title font-weight-bolder">Total Money Spent</h5>
+            <i class="fa fa-inr" style="font-size:45px;color:rgb(10, 10, 10);"></i>
         </div>
       <div class="card-body">
         <h1 class="card-text"><?php echo $out['a'];?></h1>
@@ -125,16 +144,6 @@ $out=$obj->getuser($userid, $data);
 </section>
 <!-- end update info form -->
 
-
-
-
-
-
-
-
-
-
-
 <!-- change password form -->
 <section id="changepass">
 <div class="row text-light">
@@ -155,7 +164,12 @@ $out=$obj->getuser($userid, $data);
                         required>
                     </label>
                 </p>
-               
+                <small style="font-size:15px;color:green">
+  <ul>
+  <li>Password must contain 6 to 20 characters</li>
+  <li> must contain at least one numeric digit,one uppercase and one lowercase letter</li>
+  </ul>
+  </small>
                 <p>
                     <input type="button" name="submit" class="btn btn-outline-success  cpass w-100" value="SUBMIT">
                 </p>

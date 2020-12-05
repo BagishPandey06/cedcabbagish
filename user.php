@@ -26,38 +26,51 @@
      */
     public function sign($username, $name, $mobile, $pass, $data) 
     {
-        $sql = "INSERT INTO user 
+        $sql="SELECT * from `user` where `username` LIKE '$username'";
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            return 'same';
+           
+        } else {
+                     $sql = "INSERT INTO user 
                 (`username`,`password`,`name`,`mobile`,`dateofsignup`) 
                 VALUES ( '$username', '$pass','$name','$mobile',CURDATE())";
-        if ($data->query($sql) === true) {
-            $out="inserted";
-        } else {
-            $error=array('input'=>'form','msg'=>$con->error);
+            if ($data->query($sql) === true) {
+                    $out="inserted";
+            } else {
+                    $out=$data->error;
+            }
+                return $out;
+       
         }
-        return $out;
+        
     }
     /**
      * Function Login
-     */
+    */
     public function login($username,$pass,$data)
     {
         $sql='SELECT * FROM user WHERE 
-        (`password`="'.$pass.'" AND `username`="'.$username.'" AND `isblock`=1)';
+        `password`="'.$pass.'" AND `username`="'.$username.'"';
          $res=$data->query($sql);
         if ($res->num_rows > 0) {
             while ($row=$res->fetch_assoc()) {
-                 
+                 $b=$row["isblock"];
                 $r=$row["isadmin"];
                 if ($r == '1') {
                     $_SESSION['admindata']=array
                     ('username'=>$row['username'],'id'=>$row['userid']);
                     $out="admin";
                     
-                } else {
+                } else if (($r=='0') && ($b=='1') ) {
                     $_SESSION["userdata"]=array
             ('username'=>$row['username'],'id'=>$row['userid']);         
                     $out="customer";
                     
+                } else if (($r=='0') && ($b=='0') ) {
+                     $out="wait";
+                } else {
+                    $out="credentials";
                 }
                 return $out;
             }
@@ -226,6 +239,84 @@
             return json_encode($this->rows);
         }
        
+    }
+    public function getfilterridew($userid, $data)
+    {
+        $sql = "SELECT * FROM ride where`userid`='$userid' and `ridedate` > DATE_SUB(NOW(),INTERVAL 7 DAY) ORDER BY `ridedate`";
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            while ($row=$res->fetch_assoc()) {
+                $this->rows[]=$row;
+            }
+            return json_encode($this->rows);
+        }
+       
+    }
+    public function getfilterridem($userid, $data)
+    {
+            $sql="SELECT *FROM ride Where `userid`='$userid' and `ridedate` > DATE_SUB(NOW(),INTERVAL 30 DAY) ORDER BY `ridedate`";
+
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            while ($row=$res->fetch_assoc()) {
+                $this->rows[]=$row;
+            }
+            return json_encode($this->rows);
+        }
+
+    }
+    public function getsortd($userid, $data)
+    {
+        
+        $sql="SELECT *FROM ride Where `userid`='$userid'order by DATE(`ridedate`) desc";
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            while ($row=$res->fetch_assoc()) {
+                $this->rows[]=$row;
+            }
+            return json_encode($this->rows);
+        }
+
+    }
+    public function getsortf($userid, $data)
+    {
+        
+        $sql="SELECT * FROM ride Where `userid`='$userid' ORDER BY `totalefare` DESC";
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            while ($row=$res->fetch_assoc()) {
+                $this->rows[]=$row;
+            }
+            return json_encode($this->rows);
+        }
+
+    }
+
+    public function getsortra($userid, $data)
+    {
+        
+        $sql="SELECT *FROM ride Where `userid`='$userid' order by DATE(`ridedate`) ASC";
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            while ($row=$res->fetch_assoc()) {
+                $this->rows[]=$row;
+            }
+            return json_encode($this->rows);
+        }
+
+    }
+    public function getsortfa($userid, $data)
+    {
+        
+        $sql="SELECT * FROM ride Where `userid`='$userid' ORDER BY `totalefare` ASC";
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            while ($row=$res->fetch_assoc()) {
+                $this->rows[]=$row;
+            }
+            return json_encode($this->rows);
+        }
+
     }
     public function invoice($id, $data) 
     {

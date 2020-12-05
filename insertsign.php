@@ -12,8 +12,7 @@ require 'Config.php';
 require 'user.php';
 $obj =new Config();
 $data = $obj->Connect();
-$error=array();
-$message='';
+
 if (isset($_POST['submit'])) {
     $username=isset($_POST['username'])?$_POST['username']:'';
     $password=isset($_POST['password'])?$_POST['password']:'';
@@ -21,43 +20,32 @@ if (isset($_POST['submit'])) {
     $name=isset($_POST['name'])?$_POST['name']:'';
     $mobile=isset($_POST['mobile'])?$_POST['mobile']:'';
     if ($password != $repassword) {
-        echo "<script>alert('password doesnt match1');</script>";
-        return ;
+        echo "<script>alert('Password Doesnt Match');</script>";
+        return false;
        
     } else {
          $pass=md5($password);
     }
 
-    $sql="SELECT * from user where `username` LIKE '$username'";
-
-    $res=mysqli_query($data, $sql);
-
-    if (mysqli_num_rows($res) > 0) {
-   
-        $row = mysqli_fetch_assoc($res);
-        if ($username==$row['username']) {
-            echo "<script>alert('username already exsist');</script>";
-            return false;
-        } 
-    }
-
-
-
-    if (sizeof($error) == 0) {
                 $obj=new User();
                 $out=$obj->sign($username, $name, $mobile, $pass, $data);
-        if ($out=="inserted") {
-                    header('location:login.php');
-        } else {
-            echo ("<script>alert('ohhohh data is not correct');</script>");
-            header('location:signin.php');
-        }
-                
                
-
+    if ($out=="same") {
+            echo ("<script>alert('Username already exsits');</script>");
+        //echo ("<script>alert('$out');</script>");
+                    
+    } else if ($out=='inserted') {
+        echo ("<script>alert('You Sigend up Successfully!!! Ones Admin Accepts your request you can logged In');</script>");
+        echo ("<script>window.location.href='login.php');</script>");
+       
     }
+    else {
+            echo ("<script>alert('ohhohh Data Is Not Correct');</script>");
+            echo ("<script>window.location.href='signin.php');</script>");
+            
+    }
+ 
      $data->close();
-    
 }
 ?>
 

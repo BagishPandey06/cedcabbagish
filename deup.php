@@ -1,5 +1,4 @@
 <?php
-session_start();
 /**
  * * PHP version 7.2.10
  * 
@@ -9,6 +8,7 @@ session_start();
  * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
  * @link     http://localhost/training/taskmy/logout.php
  */
+session_start();
 require 'Config.php';
 require 'user.php';
 $obj =new Config();
@@ -44,15 +44,44 @@ case 'allride':
      $out=$obj->allride($userid, $data);
      print_r($out);
     break; 
+case 'getfilterride':
+     
+     $filter=$_POST['filter'];
+    if ($filter=='week') {
+        $out=$obj->getfilterridew($userid, $data);
+    } elseif ($filter=='month') {
+        $out=$obj->getfilterridem($userid, $data);
+    } else {
+        $out=$obj->allride($userid, $data);
+    
+    }
+
+     print_r($out);
+    break;
+case 'getsortride':
+     $sort=$_POST['sort'];
+    if ($sort=='ridedate') {
+         $out=$obj->getsortd($userid, $data);
+    } elseif ($sort=='fare') {
+         $out=$obj->getsortf($userid, $data);
+    } elseif ($sort=='ridedatea') {
+         $out=$obj->getsortra($userid, $data);
+    } elseif ($sort=='farea') {
+         $out=$obj->getsortfa($userid, $data);
+    } 
+     
+     print_r($out);
+     break;
 case 'canc':
      $out=$obj->can($userid, $data);
      print_r($out);
-     break; 
+    break; 
 case 'pass':
      $newp=$_POST['newp'];
      $old=$_POST['old'];
      $out=$obj->pass($newp, $old, $userid, $data);  
      print_r($out);
+    break;
 case 'invoice':
      $id=$_POST['id'];
      $out=$obj->invoice($id, $data);

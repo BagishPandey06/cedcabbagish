@@ -9,6 +9,7 @@
   * @link     http://localhost/training2/aj.php
   */ 
   session_start();
+
   require 'Config.php';
 require 'user.php';
 $obj =new Config();
@@ -38,21 +39,20 @@ if ($cab=="CedMicro") {
     global $pd;//to initilazie pickup distance
     global $dd;//to initilazie drop distance
     //to push pickup distance to pd
-    foreach ($arr as $keys=>$values) {
-        if ($keys==$pick) {
+foreach ($arr as $keys=>$values) {
+    if ($keys==$pick) {
             $pd=(int)$values;
-        }
-       
     }
+       
+}
     //to push drop distance to dd
-    foreach ($arr as $key=>$value) {
-        if ($key==$drop) {
+foreach ($arr as $key=>$value) {
+    if ($key==$drop) {
             $dd=(int)$value;
             
-        }
     }
+}
     $distance =abs((int)$dd-(int)$pd);//to get absolute distance
-    
     
     
     switch ($cab) {
@@ -77,29 +77,30 @@ if ($cab=="CedMicro") {
      */
     function micro($distance, $pick, $drop, $kg, $cab)
     {
+        $d=$distance;
         $cost=0;
         $fixed=50;
-        if ($distance>0 && $distance<=10) {
-             $fixed+=($distance*13.50);
-        } elseif ($distance>10 && $distance<=50) {
+        if ($d>0 && $d<=10) {
+             $fixed+=($d*13.50);
+        } elseif ($d>10 && $d<=50) {
             $fixed+=(10*13.50);
-            $distance-=10;
-            $fixed+=($distance*12.00);
-        } elseif ($distance>50 && $distance<=150) {
+            $d-=10;
+            $fixed+=($d*12.00);
+        } elseif ($d>50 && $d<=150) {
             $fixed+=(10*13.50);
-            $distance-=10;
+            $d-=10;
             $fixed+=(50*12.00);
-            $distance-=50;
-            $fixed+=($distance*10.20);
+            $d-=50;
+            $fixed+=($d*10.20);
 
-        } elseif ($distance>150) {
+        } elseif ($d>150) {
             $fixed+=(10*13.50);
-            $distance-=10;
+            $d-=10;
             $fixed+=(50*12.00);
-            $distance-=50;
+            $d-=50;
             $fixed+=(100*10.20);
-            $distance-=100;
-            $fixed+=($distance*8.50);
+            $d-=100;
+            $fixed+=($d*8.50);
             
         }
         display($distance, $fixed, $cost, $pick, $drop, $kg, $cab);
@@ -112,6 +113,7 @@ if ($cab=="CedMicro") {
      */
     function royal($distance, $pick, $drop, $kg, $cab)
     {
+        $d=$distance;
         if ($kg<=0) {
             $cost=0;
         } elseif ($kg<=10 ) {
@@ -122,27 +124,27 @@ if ($cab=="CedMicro") {
             $cost=200;
         }
         $fixed=200;
-        if ($distance>0 && $distance<=10) {
-             $fixed+=($distance*15.50);
-        } elseif ($distance>10 && $distance<=50) {
+        if ($d>0 && $d<=10) {
+             $fixed+=($d*15.50);
+        } elseif ($d>10 && $d<=50) {
             $fixed+=(10*15.50);
-            $distance-=10;
-            $fixed+=($distance*14.00);
-        } elseif ($distance>50 && $distance<=150) {
+            $d-=10;
+            $fixed+=($d*14.00);
+        } elseif ($d>50 && $d<=150) {
             $fixed+=(10*15.50);
-            $distance-=10;
+            $d-=10;
             $fixed+=(50*14.00);
-            $distance-=50;
-            $fixed+=($distance*12.20);
+            $d-=50;
+            $fixed+=($d*12.20);
 
-        } elseif ($distance>150) {
+        } elseif ($d>150) {
             $fixed+=(10*15.50);
-            $distance-=10;
+            $d-=10;
             $fixed+=(50*14.00);
-            $distance-=50;
+            $d-=50;
             $fixed+=(100*12.20);
-            $distance-=100;
-            $fixed+=($distance*10.50);
+            $d-=100;
+            $fixed+=($d*10.50);
             
         }
         display($distance, $fixed, $cost, $pick, $drop, $kg, $cab);
@@ -155,6 +157,7 @@ if ($cab=="CedMicro") {
      */
     function mini($distance, $pick, $drop, $kg, $cab)
     {
+        $d=$distance;
         if ($kg<=0) {
             $cost=0;
         } elseif ($kg<=10 ) {
@@ -165,27 +168,27 @@ if ($cab=="CedMicro") {
             $cost=200;
         }
         $fixed=150;
-        if ($distance>0 && $distance<=10) {
-             $fixed+=($distance*14.50);
-        } elseif ($distance>10 && $distance<=50) {
+        if ($d>0 && $d<=10) {
+             $fixed+=($d*14.50);
+        } elseif ($d>10 && $d<=50) {
             $fixed+=(10*14.50);
-            $distance-=10;
-            $fixed+=($distance*13.00);
-        } elseif ($distance>50 && $distance<=150) {
+            $d-=10;
+            $fixed+=($d*13.00);
+        } elseif ($d>50 && $d<=150) {
             $fixed+=(10*14.50);
-            $distance-=10;
+            $d-=10;
             $fixed+=(50*13.00);
-            $distance-=50;
-            $fixed+=($distance*11.20);
+            $d-=50;
+            $fixed+=($d*11.20);
 
-        } elseif ($distance>150) {
+        } elseif ($d>150) {
             $fixed+=(10*14.50);
-            $distance-=10;
+            $d-=10;
             $fixed+=(50*13.00);
-            $distance-=50;
+            $d-=50;
             $fixed+=(100*11.20);
-            $distance-=100;
-            $fixed+=($distance*9.50);
+            $d-=100;
+            $fixed+=($d*9.50);
             
         }
         display($distance, $fixed, $cost, $pick, $drop, $kg, $cab);
@@ -198,38 +201,38 @@ if ($cab=="CedMicro") {
      */
     function suv($distance, $pick, $drop, $kg, $cab)
     {
+        $d=$distance;
         if ($kg<=0) {
             $cost=0;
         } elseif ($kg>0 && $kg<=10 ) {
-            $cost=50;
-        } elseif ($kg>10 && $kg<=20 ) {
             $cost=100;
-        } elseif ($kg>20) {
+        } else if ($kg>10 && $kg<=20 ) {
             $cost=200;
+        } else if ($kg>20) {
+            $cost=400;
         }
         $fixed=250;
-        if ($distance>0 && $distance<=10) {
-             $fixed+=($distance*16.50);
-        } elseif ($distance>10 && $distance<=50) {
+        if ($d>0 && $d<=10) {
+             $fixed+=($d*16.50);
+        } elseif ($d>10 && $d<=50) {
             $fixed+=(10*16.50);
-            $distance-=10;
-            $fixed+=($distance*15.00);
-        } elseif ($distance>50 && $distance<=150) {
+            $d-=10;
+            $fixed+=($d*15.00);
+        } elseif ($d>50 && $d<=150) { 
             $fixed+=(10*16.50);
-            $distance-=10;
+            $d-=10;
             $fixed+=(50*15.00);
-            $distance-=50;
-            $fixed+=($distance*13.20);
+            $d-=50;
+            $fixed+=($d*13.20);
 
-        } elseif ($distance>150) {
+        } elseif ($d>150) {
             $fixed+=(10*16.50);
-            $distance-=10;
+            $d-=10;
             $fixed+=(50*15.00);
-            $distance-=50;
+            $d-=50;
             $fixed+=(100*13.20);
-            $distance-=100;
-            $fixed+=($distance*11.50);
-            
+            $d-=100;
+            $fixed+=($d*11.50);
         }
         display($distance, $fixed, $cost, $pick, $drop, $kg, $cab);
     }
@@ -240,17 +243,34 @@ if ($cab=="CedMicro") {
      * @return   dispaly()
      */
     function display($distance, $fixed,$cost,$pick,$drop,$kg,$cab) 
-    {
-         $cost=(int)$cost+(int)$fixed;
-         echo $cost;
-         $_SESSION['ridedata']=array(
-            'pick'=>$pick,
-            'drop'=>$drop,
-            'cab'=>$cab,
-            'cost'=>$cost,
-            'kg'=>$kg ,
-            'distance'=>$distance);
-            
+    { 
+        $cost=(int)$cost+(int)$fixed;
+        $act=$_REQUEST['action'];
+        if ($act == 'calculation') {
+           
+         
+            echo json_encode(array($pick, $drop, $cab, $kg, $distance, $cost));
+     
+        } else if ($act == 'book') {
+            //echo json_encode(array($pick, $drop, $cab, $kg, $distance, $cost));
+            $_SESSION['ridedata']=array(
+                'pick'=>$pick,
+                'drop'=>$drop,
+                'cab'=>$cab,
+                'cost'=>$cost,
+                'kg'=>$kg ,
+                'distance'=>$distance
+            );
+            //echo $_SESSION['ridedata']['pick']
+            if (empty($_SESSION['userdata']['username'])) {
+                    echo 'login';
+                   
+            } else {
+                   echo 'user';
+                    
+            }
+             
+        }
     }
     //session_destroy();
     ?>

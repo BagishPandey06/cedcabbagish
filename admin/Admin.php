@@ -36,9 +36,9 @@ class Admin
         }
        
     }
-    public function uploc($avi, $id, $data) 
+    public function uploc( $id, $avi, $dis, $loc, $data) 
     {
-        $sql = "UPDATE `location` SET `isavilable`=$avi WHERE `id`=$id";
+        $sql = "UPDATE `location` SET `isavilable`='$avi',`distance`='$dis',`name`='$loc' WHERE `id`=$id";
         if ($data->query($sql) === true) {
             $out="inserted";
         } else {
@@ -141,8 +141,17 @@ class Admin
         return $out;
        
     }
-    //gjdlgdklfg
-
+    public function delloc($id, $data) 
+    {
+        $sql ="DELETE FROM `location` WHERE `id`=$id";
+        if ($res=$data->query($sql)==true) {
+            $out="inserted";
+        } else {
+            $out="khtm"; 
+        }
+        return $out;
+       
+    }
     public function getpenride($data) 
     {
         $sql = "SELECT * FROM ride where `status`=0";
@@ -234,6 +243,7 @@ class Admin
         );
         return $out;
     }
+    //all ride
     public function getfilterridew($data)
     {
         
@@ -286,6 +296,147 @@ class Admin
         }
 
     }
+    public function getsortra($data)
+    {
+        
+        $sql="SELECT *FROM ride order by DATE(`ridedate`) ASC";
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            while ($row=$res->fetch_assoc()) {
+                $this->rows[]=$row;
+            }
+            return json_encode($this->rows);
+        }
+
+    }
+    public function getsortfa($data)
+    {
+        
+        $sql="SELECT * FROM ride ORDER BY `totalefare` ASC";
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            while ($row=$res->fetch_assoc()) {
+                $this->rows[]=$row;
+            }
+            return json_encode($this->rows);
+        }
+
+    }
+    //pending ride filter
+    public function getfilterpendridew($data)
+    {
+        
+        $sql="SELECT *FROM ride Where `status`=0 and `ridedate` > DATE_SUB(NOW(),INTERVAL 7 DAY) ORDER BY `ridedate`";
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            while ($row=$res->fetch_assoc()) {
+                $this->rows[]=$row;
+            }
+            return json_encode($this->rows);
+        }
+
+    }
+    public function getfilterpendridem($data)
+    {
+            $sql="SELECT *FROM ride Where `status`=0 and `ridedate` > DATE_SUB(NOW(),INTERVAL 30 DAY) ORDER BY `ridedate`";
+
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            while ($row=$res->fetch_assoc()) {
+                $this->rows[]=$row;
+            }
+            return json_encode($this->rows);
+        }
+
+    }
+  
+    //pending sort
+    public function getpendsortd($data)
+    {
+        
+        $sql="SELECT *FROM ride where `status`=0 order by DATE(`ridedate`) desc";
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            while ($row=$res->fetch_assoc()) {
+                $this->rows[]=$row;
+            }
+            return json_encode($this->rows);
+        }
+
+    }
+    public function getpendsortf($data)
+    {
+        
+        $sql="SELECT * FROM ride where `status`=0 ORDER BY (`totalefare`) DESC";
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            while ($row=$res->fetch_assoc()) {
+                $this->rows[]=$row;
+            }
+            return json_encode($this->rows);
+        }
+
+    }
+    //filter completed
+    public function getfiltercomridew($data)
+    {
+        
+        $sql="SELECT *FROM ride Where `status`=1 and `ridedate` > DATE_SUB(NOW(),INTERVAL 7 DAY) ORDER BY `ridedate`";
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            while ($row=$res->fetch_assoc()) {
+                $this->rows[]=$row;
+            }
+            return json_encode($this->rows);
+        }
+
+    }
+    public function getfiltercomridem($data)
+    {
+            $sql="SELECT *FROM ride Where `status`=1 and `ridedate` > DATE_SUB(NOW(),INTERVAL 30 DAY) ORDER BY `ridedate`";
+
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            while ($row=$res->fetch_assoc()) {
+                $this->rows[]=$row;
+            }
+            return json_encode($this->rows);
+        }
+
+    }
+  
+    //completed sort
+    public function getcomsortd($data)
+    {
+        
+        $sql="SELECT *FROM ride where `status`=1 order by DATE(`ridedate`) desc";
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            while ($row=$res->fetch_assoc()) {
+                $this->rows[]=$row;
+            }
+            return json_encode($this->rows);
+        }
+
+    }
+    public function getcomsortf($data)
+    {
+        
+        $sql="SELECT * FROM ride where `status`=1 ORDER BY (`totalefare`) DESC";
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            while ($row=$res->fetch_assoc()) {
+                $this->rows[]=$row;
+            }
+            return json_encode($this->rows);
+        }
+
+    }
+    //end completed filter
+
+
+
+   
     public function pass($newp, $old, $adminid, $data)
     {   
         $sql="SELECT * FROM user WHERE `userid`=$adminid";
@@ -302,11 +453,11 @@ class Admin
 
         if ($oldp==$olda) {
             $newpa=md5($newp);
-            $sql="UPDATE user SET`password`='$newpa' WHERE `userid`=$adminid";
+            $sql="UPDATE user SET `password`='$newpa' WHERE `userid`=$adminid";
             if ($res=$data->query($sql)==true) {
                 $out="inserted";
             } else {
-                $out="sorrydfg"; 
+                $out="sorry"; 
             }
               return $out;
         } 

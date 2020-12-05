@@ -41,7 +41,7 @@ require 'insertsign.php';
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="navbar-nav ml-auto mr-3 ht text-right">
       <li class="nav-item">
-             <a class="nav-link pt-3" href="#">FEATURES</a>
+             <a class="nav-link pt-3" href="#">Features</a>
              <section>
                <div class="container">
                  <div class="row">
@@ -49,7 +49,7 @@ require 'insertsign.php';
              </section>
            </li>
            <li class="nav-item">
-             <a class="nav-link pt-3" href="#">REVIEWS</a>
+             <a class="nav-link pt-3" href="#">Reviews</a>
            </li>
            <li class="nav-item">
              <a class="nav-link pt-3" href="index.php">Book Now</a>
@@ -78,16 +78,22 @@ require 'insertsign.php';
     <label for="Password">Password</label>
     <input type="password" name="password" id="pass" class="form-control"required >
   </div>
+  <small style="font-size:12px;color:red">
+  <ul>
+  <li>Password must contain 6 to 20 characters</li>
+  <li> must contain at least one numeric digit,one uppercase and one lowercase letter</li>
+  </ul>
+  </small>
   <div class="form-group">
     <label for="rePassword">Re-Password</label>
-    <input type="password" name="repassword" id="repass" class="form-control"required >
+    <input type="password" name="repassword" onclick="return CheckPassword()" id="repass" class="form-control"required >
   </div>
   <div class="form-group">
     <label for="mobile">Mobile</label>
-    <input type="number" name="mobile" onkeypress="return check()" class="form-control" required >
+    <input type="number" name="mobile" id="mob" class="form-control" required >
   </div>
   <div class="form-group d-block">
-  <button type="submit" name="submit" class="btn btn-outline-primary ">Submit</button>
+  <button type="submit" name="submit" class="btn btn-outline-primary" >Submit</button>
   <button type="submit" onclick='window.location.href="login.php"' name="submit" class="btn btn-outline-success ml-5">LOGIN</button>
   </div>
 </form>
@@ -128,7 +134,29 @@ require 'insertsign.php';
   </div>
   </section>
   <script>
-    
+  
+    function CheckPassword() 
+{ 
+var chk=$("#pass").val();
+var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+if(chk.length<=6 || chk.length>=20){
+               alert("Password Must Contain 6 to 20 Characters Only !");
+               $("#pass").val('');
+              return false;
+           } else {
+            if(chk.match(passw)) 
+{ 
+return true;
+}
+else
+{ 
+alert('Password Must Conatin  at least One Numeric Digit, One Uppercase and One Lowercase Letter !')
+return false;
+}
+            return true;
+           }
+
+}
     $("#nam").keypress(function(event) {
     var character = String.fromCharCode(event.keyCode);
     return isValid(character);     
@@ -137,15 +165,23 @@ require 'insertsign.php';
 function isValid(str) {
     return !/[~`.!@#$%\^&*()+=\-\[\]\\';0123456789,/{}|\\":<>\?]/g.test(str);
 }
-  function check(){
-    if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
-      alert("Please enter numeric value only");
-      return false;
-    } else {
-     
-      return true;
-    }
-  }
+
+$("#mob").keypress(function(event) {
+  var m=$(this).val();
+           if(m.lenth<=10 || m.length>=10){
+               alert("mobile no. is valid of 10 digits only !");
+              return false;
+           } else {
+            return true;
+           }
+    var character = String.fromCharCode(event.keyCode);
+    return isValidm(character);     
+});
+
+function isValidm(str) {
+    return !/[~`.!@#$%\^&*()+=\-\[\]\\';(a-z)(A-Z),/{}|\\":<>\?]/g.test(str);
+}
+ 
   </script>
   </body>
 </html>

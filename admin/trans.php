@@ -27,7 +27,9 @@ case 'insertloc':
 case 'uploc':
     $id=$_POST['id'];
     $avi=$_POST['avi'];
-        $out=$obj->uploc($avi, $id, $data);
+    $dis=$_POST['dis'];
+    $loc=$_POST['loc'];
+        $out=$obj->uploc($id, $avi, $dis, $loc, $data);
         print_r($out);
     break;
 case 'getloc':
@@ -50,6 +52,11 @@ case 'acceptuser':
 case 'deluser':
     $id=$_POST['id'];
     $out=$obj->deluser($id, $data);
+    print_r($out);
+    break; 
+case 'delloc':
+    $id=$_POST['id'];
+    $out=$obj->delloc($id, $data);
     print_r($out);
     break; 
 case 'getacptuser':
@@ -82,6 +89,7 @@ case 'delride':
     $out=$obj->delr($id, $data);
     print_r($out);
     break;
+    //filter all ride
 case 'getfilterride':
     $filter=$_POST['filter'];
     if ($filter=='week') {
@@ -101,15 +109,71 @@ case 'getsortride':
         $out=$obj->getsortd($data);
     } elseif ($sort=='fare') {
         $out=$obj->getsortf($data);
+    } elseif ($sort=='ridedatea') {
+        $out=$obj->getsortra($data);
+    } elseif ($sort=='farea') {
+        $out=$obj->getsortfa($data);
     } 
     
     print_r($out);
     break;
+    //filrter all ride
+    //filrter pending ride
+case 'getfilterpendride':
+    $filter=$_POST['filter'];
+    if ($filter=='weekp') {
+        $out=$obj->getfilterpendridew($data);
+    } elseif ($filter=='monthp') {
+        $out=$obj->getfilterpendridem($data);
+    } else {
+        $out=$obj->getpenride($data);
+    
+    }
+    
+    print_r($out);
+    break;
+case 'getsortpendride':
+    $sort=$_POST['sort'];
+    if ($sort=='ridedatep') {
+        $out=$obj->getpendsortd($data);
+    } elseif ($sort=='farep') {
+        $out=$obj->getpendsortf($data);
+    } 
+    
+    print_r($out);
+    break;
+//filrter complete ride
+//filrter complete ride
+case 'getfiltercomride':
+    $filter=$_POST['filter'];
+    if ($filter=='weekc') {
+        $out=$obj->getfiltercomridew($data);
+    } elseif ($filter=='monthc') {
+        $out=$obj->getfiltercomridem($data);
+    } else {
+        $out=$obj->compride($data);
+    
+    }
+    
+    print_r($out);
+    break;
+case 'getsortcomride':
+    $sort=$_POST['sort'];
+    if ($sort=='ridedatec') {
+        $out=$obj->getcomsortd($data);
+    } elseif ($sort=='farec') {
+        $out=$obj->getcomsortf($data);
+    } 
+    
+    print_r($out);
+    break;
+//end filter completed
 case 'password':
     $newp=$_POST['newp'];
     $old=$_POST['old'];
     $out=$obj->pass($newp, $old, $adminid, $data);  
     print_r($out);
+    break;
 case 'invoice':
     $id=$_POST['id'];
     $out=$obj->invoice($id, $data);

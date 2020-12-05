@@ -35,10 +35,12 @@ if (isset($_POST['submit'])) {
             header('location:userdashboard.php');
         } elseif ($out=="admin") {
             header('location:admin/dashboardadmin.php');
-        } else {
-            echo '<script>alert("Please enter valid username and password");</script>';
-            return false;
-        }     
+        } else if ($out == "wait") {
+           echo "<script>alert('Wait for Admin to Accept you as customer');</script>";
+           return false;
+        }     else {
+            echo "<script>alert('Please Enter Correct Credential');</script>";
+        }
        
     }
     $data->close();

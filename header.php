@@ -10,15 +10,14 @@
  */
 session_start();
 if (empty($_SESSION['userdata'])) {
-  header('location:login.php');
+    header('location:login.php');
 } else {
-   $userid=$_SESSION['userdata']['id'];
+     $userid=$_SESSION['userdata']['id'];
 }
 require 'Config.php';
 require 'user.php';
 $obj =new Config();
 $data = $obj->Connect();
-
 
 if (!empty($_SESSION['ridedata'])) {
     $pick=$_SESSION['ridedata']['pick'];
@@ -52,15 +51,7 @@ if (!empty($_SESSION['ridedata'])) {
   <link rel="stylesheet" type="text/css" href="rideindex.css">
   <script src="ride.js"></script>
   <script>
-  function result(){
-    if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
-      alert("Please enter numeric value only");
-      return false;
-    } else {
-     
-      return true;
-    }
-  }
+  
   function printinvoice(exampleModal){
     var printt=document.getElementById('exampleModal');
     var winPrint =window.open('', '', 'width=900, hegiht=650');
@@ -95,7 +86,7 @@ if (!empty($_SESSION['ridedata'])) {
   <li class="nav-item dropdown">
     <a class="nav-link " href="#" id="home"  >
       <i class="fa fa-home" style="font-size:20px;color:rgb(10, 10, 10);"></i>
-   HOME</a>
+   Home</a>
     </li>
     <li class="nav-item dropdown">
     <a class="nav-link" href="index.php" id="navbarDropdown2" >
@@ -118,7 +109,7 @@ if (!empty($_SESSION['ridedata'])) {
     <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <i class="fa fa-user" style="font-size:20px;color:rgb(10, 10, 10);"></i>
-    ACCOUNT
+    Account
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
             <a class="dropdown-item" id="update"href="#">update info.</a>

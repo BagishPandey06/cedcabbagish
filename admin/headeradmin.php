@@ -34,6 +34,7 @@ $out=$objj->fetchdata($data);
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js">
   </script>
@@ -68,7 +69,7 @@ $out=$objj->fetchdata($data);
       </ul>
     </div>
   </nav>
-  <div class="container m-0">
+  <div class="container-fluid m-0">
     <div class="row">
       <div class="col-sm-2 bg-dark pt-5">
         <div class="dropdown d-block mb-5 mt-5">
@@ -80,7 +81,7 @@ $out=$objj->fetchdata($data);
   <button class="btn btn-outline-success  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   <i class="fa fa-car" style="font-size:20px;color:rgb(10, 10, 10);"></i> &nbsp;Rides
   </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+  <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
     <a class="dropdown-item" id="penride" href="#">Pending rides</a>
     <a class="dropdown-item" id="compride" href="#">Completed rides</a>
     <a class="dropdown-item" id="cancelride" href="#">Canceled rides</a>
@@ -89,7 +90,7 @@ $out=$objj->fetchdata($data);
 </div>
 <div class="dropdown d-block mb-5 mt-5">
   <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  <i class="fa fa-user" style="font-size:20px;color:rgb(10, 10, 10);"></i> &nbsp; Users
+  <i class="fa fa-user-circle-o" style="font-size:20px;color:rgb(10, 10, 10);"></i> &nbsp; Users
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
     <a class="dropdown-item" id="penuser" href="#">Pending user request</a>
@@ -103,7 +104,7 @@ $out=$objj->fetchdata($data);
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
     <a class="dropdown-item" id="location" href="#">Location List</a>
-    <a class="dropdown-item" id="alocation" href="#">Add New Location</a>
+    <a class="dropdown-item" id="alocation" href="#"><i class="material-icons m-0 p-0">add_location</i>Add New Location</a>
   </div>
 </div>
 <div class="dropdown d-block mb-5 mt-5">

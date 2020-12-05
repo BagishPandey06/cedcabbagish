@@ -13,27 +13,68 @@ require 'headeradmin.php';
 ?>
 <!-- filter -->
 <section id="fs">
+<div class="row">
+<div class="col-sm-2">
       <select class="form-control filter" style="width:10rem">
-        <option>filter by</option>
+        <option>All-ride</option>
         <option value="week">Last 7 Days</option>
         <option value="month">Last 30 days</option>
-        </select>
+        </select></div><div class="col-sm-2">
         <select class="form-control sort" style="width:10rem">
         <option>sort by</option>
         <option value="ridedate">Ride date</option>
         <option value="fare">Fare</option>
-        </select>
+        <option value="ridedatea">Ride Date(ascending)</option>
+        <option value="farea">Fare(ascending)</option>
+        </select></div>
+        </div>
 </section>
 <!-- end filter -->
+<!-- filter pending ride -->
+<section id="fsp">
+<div class="row">
+<div class="col-sm-2">
+      <select class="form-control filterp" style="width:10rem">
+        <option>All Pending</option>
+        <option value="weekp">Last 7 Days</option>
+        <option value="monthp">Last 30 Days</option>
+        </select></div><div class="col-sm-2">
+        <select class="form-control sortp" style="width:10rem">
+        <option>sort by</option>
+        <option value="ridedatep">Ride Date</option>
+        <option value="farep">Fare</option>
+        </select>
+        </div>
+        </div>
+</section>
+<!-- end filter pending -->
+<!-- filter completed ride -->
+<section id="fsc">
+<div class="row">
+<div class="col-sm-2">
+      <select class="form-control filterc" style="width:10rem">
+        <option>All Completed</option>
+        <option value="weekc">Last 7 Days</option>
+        <option value="monthc">Last 30 days</option>
+        </select>
+        </div><div class="col-sm-2">
+        <select class="form-control sortc" style="width:10rem">
+        <option>sort by</option>
+        <option value="ridedatec">Ride Date</option>
+        <option value="farec">Fare</option>
+        </select></div>
+        </div>
+</section>
+<!-- end filter completed -->
 <!-- admin home -->
 <section id="homeadmin">
 <div class="container-fluid">
 <div class="row  ml-5 text-dark text-center">
   <div class="col-sm-4 mt-3">
-    <div class="card  bg-success" style="width :15rem;">
+    <div class="card  bg-success" style="width :20rem;">
         <div class="card-header">
             <h5 class="card-title">Total USER</h5>
-            <i class="fa fa-user"></i>
+            <i class="fa fa-user-circle-o" style="font-size:30px"></i>
         </div>
       <div class="card-body">
         <h1 class="card-text"><?php echo $out['tu'];?></h1>
@@ -43,23 +84,23 @@ require 'headeradmin.php';
   </div>
 
   <div class="col-sm-4 mt-3">
-    <div class="card  bg-info" style="width :15rem;">
+    <div class="card  bg-info" style="width :20rem;">
         <div class="card-header">
             <h5 class="card-title">Approved USER</h5>
-            <i class="fa fa-user"></i>
+            <i class="fa fa-user-circle-o" style="font-size:30px"></i>
         </div>
       <div class="card-body">
         <h1 class="card-text"><?php echo $out['tau'];?></h1>
-        <button id="acptuserb" class="btn btn-outline-light w-100"><i class="fa fa-arrow-circle-right"></i></button>
+        <button id="acptuserb" class="btn btn-outline-light w-100"><i class="fa fa-arrow-circle-right fa-right"></i></button>
         </div>
     </div>
   </div>
 
   <div class="col-sm-4 mt-3">
-    <div class="card  bg-danger" style="width :15rem;">
+    <div class="card  bg-danger" style="width :20rem;">
         <div class="card-header">
             <h5 class="card-title">Pending USER</h5>
-            <i class="fa fa-user"></i>
+            <i class="fa fa-user-circle-o" style="font-size:30px"></i>
         </div>
       <div class="card-body">
         <h1 class="card-text"><?php echo $out['tpu'];?></h1>
@@ -69,10 +110,10 @@ require 'headeradmin.php';
   </div>
 
   <div class="col-sm-4 mt-3">
-    <div class="card  bg-success" style="width :15rem;">
+    <div class="card  bg-success" style="width :20rem;">
         <div class="card-header">
             <h5 class="card-title">Total Ride</h5>
-            <i class="fa fa-car"></i>
+            <i class="fa fa-car" style="font-size:30px"></i>
         </div>
       <div class="card-body">
         <h1 class="card-text"><?php echo $out['tr'];?></h1>
@@ -82,10 +123,10 @@ require 'headeradmin.php';
   </div>
 
   <div class="col-sm-4 mt-3">
-    <div class="card  bg-info" style="width :15rem;">
+    <div class="card  bg-info" style="width :20rem;">
         <div class="card-header">
-            <h5 class="card-title">pending Ride</h5>
-            <i class="fa fa-car"></i>
+            <h5 class="card-title">Pending Ride</h5>
+            <i class="fa fa-car" style="font-size:30px"></i>
         </div>
       <div class="card-body">
         <h1 class="card-text"><?php echo $out['pr'];?></h1>
@@ -95,10 +136,10 @@ require 'headeradmin.php';
   </div>
 
   <div class="col-sm-4 mt-3">
-    <div class="card  bg-danger" style="width :15rem;">
+    <div class="card  bg-danger" style="width :20rem;">
         <div class="card-header">
             <h5 class="card-title">complete Ride</h5>
-            <i class="fa fa-car"></i>
+            <i class="fa fa-car" style="font-size:30px"></i>
         </div>
       <div class="card-body">
         <h1 class="card-text"><?php echo $out['cr'];?></h1>
@@ -108,10 +149,10 @@ require 'headeradmin.php';
   </div>
 
   <div class="col-sm-4 mt-3">
-    <div class="card  bg-success" style="width :15rem;">
+    <div class="card  bg-success" style="width :20rem;">
         <div class="card-header">
             <h5 class="card-title">Total locations</h5>
-            <i class="fa fa-map"></i>
+            <i class="fa fa-map" style="font-size:30px"></i>
         </div>
       <div class="card-body">
         <h1 class="card-text"><?php echo $out['tl'];?></h1>
@@ -121,10 +162,10 @@ require 'headeradmin.php';
   </div>
 
   <div class="col-sm-4 mt-3">
-    <div class="card  bg-info" style="width :15rem;">
+    <div class="card  bg-info" style="width :20rem;">
         <div class="card-header">
-            <h5 class="card-title">cancelled ride</h5>
-            <i class="fa fa-car" ></i>
+            <h5 class="card-title">Cancelled ride</h5>
+            <i class="fa fa-car" style="font-size:30px"></i>
         </div>
       <div class="card-body">
         <h1 class="card-text"><?php echo $out['canr'];?></h1>
@@ -134,10 +175,10 @@ require 'headeradmin.php';
   </div>
 
   <div class="col-sm-4 mt-3 ">
-    <div class="card  bg-danger" style="width :15rem;">
+    <div class="card  bg-danger" style="width :20rem;">
         <div class="card-header">
             <h5 class="card-title">Total Earning</h5>
-            <i class="fa fa-inr"></i>
+            <i class="fa fa-inr" style="font-size:30px"></i>
         </div>
       <div class="card-body">
         <h1 class="card-text"><?php echo $out['t'];?></h1>
@@ -244,24 +285,31 @@ require 'headeradmin.php';
   <!-- change password form -->
 <section id="chngadminpass">
 <div class="container">
-<div class="row">
-<div class="col-sm-4 ml-5 bg-light">
+<div class="row text-light">
+<div class="col-sm-1"></div>
+<div class="col-sm-5 bg-dark border-top border-bottom rounded border-primary ml-5 p-5 ">
+<h1 class=" text-center mb-5">Update Password</h1>
 <form action="" method="POST">
-                <p>
+               
                     <label for="old password" class="font-wegiht-bold">Old Password:<br>
-                    <input type="password" class="form-control" name="pass" id="op"
+                    <input type="password" class="form-control w-100" name="pass" id="op"
                     value="" required>
                     </label>
-                </p>
+               
                 <p>
                     <label for="new password" class="font-wegiht-bold">New Password:<br>
                         <input type="password" class="form-control" name="newpass" id="np"
                         value="" required>
                     </label>
                 </p>
-               
+                <small style="font-size:15px;color:green">
+  <ul>
+  <li>Password must contain 6 to 20 characters</li>
+  <li> must contain at least one numeric digit,one uppercase and one lowercase letter</li>
+  </ul>
+  </small>
                 <p>
-                    <input type="button" name="submit" class="btn btn-warning" id="chngpass" value="SUBMIT">
+                    <input type="button" name="submit" class="btn btn-outline-warning mb-5" id="chngpass" value="SUBMIT">
                 </p>
             </form>
             </div>
