@@ -256,9 +256,18 @@ require 'headeradmin.php';
   
   <!-- add location -->
   <section id="addlocation">
+  <div class="container">
+<div class="row text-light">
+<div class="col-sm-3">
+<div class="bg-dark p-2 mt-5 w-100"></div>
+            <div class="bg-dark p-2 mt-3 w-100"></div>
+            <div class="bg-dark p-2 mt-5 w-100"></div>
+           <div class="bg-dark p-2 mt-3 w-100"></div></div>
+<div class="col-sm-5 bg-dark border-top border-bottom rounded border-primary  p-5 ">
+<h1 class="text-center">ADD-Location</h1>
                       <form method="post">
                         <div class="form-group">
-                          <label for="exampleInputEmail1" class="font-wegiht-bold">LOCATION NAME</label>
+                          <label for="exampleInputEmail1" class="font-wegiht-bold">Location Name</label>
                           <input type="text" class="form-control"  id="locationa" >
                         </div>
                         <div class="form-group">
@@ -266,14 +275,21 @@ require 'headeradmin.php';
                           <input type="NUMBER" class="form-control"  id="distance">
                         </div>
                         <div class="form-group">
-                          <label for="avilabilty" class="font-wegiht-bold">service avilable</label>
+                          <label for="avilabilty" class="font-wegiht-bold">Service Avilable</label>
                           <select class="form-control" id="avilable" >
                             <option value="1">Avilable</option>
                             <option value="0">Not-avilable</option>
                           </select>
                         </div>
-                        <input type="submit" class="btn btn-primary" id="Add" value="Add-location">
+                        <input type="submit" class="btn btn-outline-primary w-100" id="Add" value="Add-location">
                       </form>
+                      </div>
+                      <div class="col-sm-4">
+<div class="bg-dark p-2 mt-5 w-100"></div>
+            <div class="bg-dark p-2 mt-3 w-100"></div>
+            <div class="bg-dark p-2 mt-5 w-100"></div>
+           <div class="bg-dark p-2 mt-3 w-100"></div></div>
+                      </div>
   </section>
   <!-- end add location -->
   <!-- all users -->

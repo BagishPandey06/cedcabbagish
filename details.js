@@ -36,7 +36,7 @@ $(document).ready(function () {
     $("#changepass").hide();
     $("#pnd_ri").hide();
     $("#com_ri").hide();
-    $("#all_ri").hide();
+    $("#all_ri").hide();$("#fsp").hide();
     $("#canc").hide();
     $("#fs").hide();
     $(document).on("click","#home",function () {
@@ -44,7 +44,7 @@ $(document).ready(function () {
         $("#updateinfo").hide();
         $("#changepass").hide();
         $("#pnd_ri").hide();
-        $("#com_ri").hide();
+        $("#com_ri").hide();$("#fsp").hide();
         $("#all_ri").hide();
         $("#canc").hide(); $("#fs").hide();
     });
@@ -54,7 +54,7 @@ $(document).ready(function () {
             $("#updateinfo").show();
             $("#changepass").hide();
             $("#pnd_ri").hide();
-            $("#com_ri").hide();
+            $("#com_ri").hide();$("#fsp").hide();
             $("#all_ri").hide();
             $("#canc").hide(); $("#fs").hide();
     });
@@ -66,7 +66,7 @@ $(document).ready(function () {
         $("#pnd_ri").hide();
         $("#com_ri").hide();
         $("#all_ri").hide(); $("#fs").hide();
-        $("#canc").hide();
+        $("#canc").hide();$("#fsp").hide();
 
     });
     $(document).on("click","#info",function () {
@@ -157,7 +157,7 @@ $(document).ready(function () {
             $("#updateinfo").hide();
             $("#changepass").hide();
             $("#pnd_ri").show();
-            $("#com_ri").hide();
+            $("#com_ri").hide();$("#fsp").show();
             $("#all_ri").hide(); $("#fs").hide();
             $("#canc").hide();
             showridea();
@@ -225,8 +225,9 @@ $(document).ready(function () {
         $("#userdash").hide();
             $("#updateinfo").hide();
             $("#changepass").hide();
+            $("#fs").hide();
             $("#pnd_ri").hide();
-            $("#com_ri").show();
+            $("#com_ri").show();$("#fsp").hide();
             $("#all_ri").hide();
             $("#canc").hide();
         html = '<h1 class="text-center">completed rides</h1><table class="table table-striped table-dark">\
@@ -289,7 +290,7 @@ $(document).ready(function () {
     //end completed ride
     $(document).on("click","#canri",function () {
         $("#userdash").hide();
-        $("#updateinfo").hide();
+        $("#updateinfo").hide();$("#fsp").hide();
         $("#changepass").hide(); $("#fs").hide();
         $("#pnd_ri").hide();
         $("#com_ri").hide();
@@ -327,11 +328,11 @@ $(document).ready(function () {
             $("#changepass").hide();
             $("#pnd_ri").hide();
             $("#com_ri").hide();
-            $("#canc").hide();
+            $("#canc").hide();$("#fsp").hide();
             $("#all_ri").show(); $("#fs").show();
         html = '<h1 class="text-center">All rides</h1><table class="table table-striped table-dark">\
         <tr class="font-weight-bold"><td>Ridedate</td><td>From</td><td>To</td><td>Distance<small>(km)</small></td><td>Luggage<small>(kg)</small></td>\
-        <td>Amount<small>(inr)</small></td><td>Cab</td><td>status</td></tr>';
+        <td>Amount<small>(inr)</small></td><td>Cab</td><td class="text-center">status</td></tr>';
         var action = "allride";
         $.ajax({
             url: "deup.php",
@@ -344,11 +345,11 @@ $(document).ready(function () {
                 //alert(result);
                 for (var i = 0; i < result.length; i++) {
                     if (result[i]['status'] == 0) {
-                        status = '<td class="text-warning">pending..<i class="fa fa-spinner fa-spin" style="font-size:24px"></i></td>';
+                        status = '<td class="text-warning text-center">pending..<i class="fa fa-spinner fa-spin" style="font-size:24px"></i></td>';
                     } else if (result[i]['status'] == 1) {
-                        status = '<td class="text-success">Completed !</td>';
+                        status = '<td class="text-success text-center">Completed !<i class="fa fa-check-circle" style="font-size:24px;color:green"></i></td>';
                     } else {
-                        status = '<td class="text-danger">Cancle</td>';
+                        status = '<td class="text-danger text-center">Canceled</td>';
                     }
                     html +=  '<tr><td>' + result[i]['ridedate'] + '</td><td>' + result[i]['froml'] + '</td><td>' +
                     result[i]['tol'] + '</td><td>'+ result[i]['totaldistance'] + '</td><td>' +
@@ -370,13 +371,13 @@ $(document).ready(function () {
         $("#changepass").hide();
         $("#pnd_ri").hide();
         $("#com_ri").hide();
-        $("#canc").hide();
+        $("#canc").hide();$("#fsp").hide();
         $("#all_ri").show(); $("#fs").show();
         sort=$(this).val();
         html = '<h1 class="text-center font-weight-bold">All Rides</h1>\
         <table class="table table-striped table-dark">\
     <tr class="font-weight-bold table-light text-dark"><td>Ridedate</td><td>From</td><td>To</td><td>Distance<small>(km)</small></td><td>Luggage<small>(kg)</small></td><td>Amount<small>(inr)</small></td>\
-    <td>Cab</td><td>status</td></tr>';
+    <td>Cab</td><td class="text-center">status</td></tr>';
         var action = "getsortride";
         $.ajax({
             url: "deup.php",
@@ -390,11 +391,11 @@ $(document).ready(function () {
                 
                 for (var i = 0; i < result.length; i++) {
                     if (result[i]['status'] == 0) {
-                        status = '<td class="text-warning">pending..<i class="fa fa-spinner fa-spin" style="font-size:24px"></i></td>';
+                        status = '<td class="text-warning text-center">pending..<i class="fa fa-spinner fa-spin" style="font-size:24px"></i></td>';
                     } else if (result[i]['status'] == 1) {
-                        status = '<td class="text-success"><span>Completed !<i class="fa fa-check-circle" style="font-size:36px;color:green"></i></span></td>';
+                        status = '<td class="text-success text-center"><span>Completed !<i class="fa fa-check-circle" style="font-size:24px;color:green"></i></span></td>';
                     } else {
-                        status = '<td class="text-danger">Cancel</td>';
+                        status = '<td class="text-danger text-center">Canceled</td>';
                     }
                     html += '<tr><td>' + result[i]['ridedate'] + '</td><td>' + result[i]['froml'] + '</td><td>' + result[i]['tol'] + '</td><td>'
                         + result[i]['totaldistance'] + '</td><td>' + result[i]['luggage'] + '</td><td>'
@@ -414,13 +415,13 @@ $(document).ready(function () {
             $("#changepass").hide();
             $("#pnd_ri").hide();
             $("#com_ri").hide();
-            $("#canc").hide();
+            $("#canc").hide();$("#fsp").hide();
             $("#all_ri").show(); $("#fs").show();
         filter=$(this).val();
         html = '<h1 class="text-center font-weight-bold">All Rides</h1>\
         <table class="table table-striped table-dark">\
     <tr class="font-weight-bold table-light text-dark"><td>Ridedate</td><td>From</td><td>To</td><td>Distance<small>(km)</small></td><td>Luggage<small>(kg)</small></td><td>Amount<small>(inr)</small></td>\
-    <td>Cab</td><td>status</td></tr>';
+    <td>Cab</td><td class="text-center">status</td></tr>';
         var action = "getfilterride";
         $.ajax({
             url: "deup.php",
@@ -434,11 +435,11 @@ $(document).ready(function () {
                
                 for (var i = 0; i < result.length; i++) {
                     if (result[i]['status'] == 0) {
-                        status = '<td class="text-warning">pending..<i class="fa fa-spinner fa-spin" style="font-size:24px"></i></td>';
+                        status = '<td class="text-warning text-center">pending..<i class="fa fa-spinner fa-spin" style="font-size:24px"></i></td>';
                     } else if (result[i]['status'] == 1) {
-                        status = '<td class="text-success">Completed !<i class="fa fa-check-circle" style="font-size:36px;color:green"></i></td>';
+                        status = '<td class="text-success text-center">Completed !<i class="fa fa-check-circle" style="font-size:24px;color:green"></i></td>';
                     } else {
-                        status = '<td class="text-danger">Cancel</td>';
+                        status = '<td class="text-danger text-center">Canceled</td>';
                     }
                     html += '<tr><td>' + result[i]['ridedate'] + '</td><td>' + result[i]['froml'] + '</td><td>' + result[i]['tol'] + '</td><td>'
                         + result[i]['totaldistance'] + '</td><td>' + result[i]['luggage'] + '</td><td>'
@@ -450,6 +451,81 @@ $(document).ready(function () {
         });
       });
     //end filter by
+
+    $(document).on("change",".sortp",function(){
+        $("#userdash").hide();
+        $("#updateinfo").hide();
+        $("#changepass").hide();
+        $("#pnd_ri").show();
+        $("#com_ri").hide();
+        $("#canc").hide();  $("#fs").hide();
+        $("#all_ri").hide(); $("#fsp").show();
+        sort=$(this).val();
+        html = '<h1 class="text-center font-weight-bold">Pending Rides</h1>\
+        <table class="table table-striped table-dark">\
+    <tr class="font-weight-bold table-light text-dark"><td>Ridedate</td><td>From</td><td>To</td><td>Distance<small>(km)</small></td><td>Luggage<small>(kg)</small></td><td>Amount<small>(inr)</small></td>\
+    <td>Cab</td><td>Actions</td></tr>';
+        var action = "getsortpendride";
+        $.ajax({
+            url: "deup.php",
+            type: "post",
+            data: {
+                action: action,
+                sort: sort
+            },
+            dataType: "json",
+            success: function (result) {
+                
+                for (var i = 0; i < result.length; i++) {
+                    
+                    html += '<tr><td>' + result[i]['ridedate'] + '</td><td>' + result[i]['froml'] + '</td><td>' + result[i]['tol'] + '</td><td>'
+                        + result[i]['totaldistance'] + '</td><td>' + result[i]['luggage'] + '</td><td>'
+                        + result[i]['totalefare'] + '</td><td>' + result[i]['cab'] + '</td><td><button class="btn btn-outline-danger pl-3 delr" \
+                        data-id='+ result[i]['rideid'] + '><i class="fa fa-trash" aria-hidden="true"></i></button></td></tr>';
+                }
+                html += '</table>';
+                $("#pnd_ri").html(html);
+            }
+        });
+      });
+    //end sort by
+    $(document).on("change",".filterp",function(){
+        $("#userdash").hide();
+        $("#updateinfo").hide();
+        $("#changepass").hide();
+        $("#pnd_ri").show();
+        $("#com_ri").hide();
+        $("#canc").hide();  $("#fs").hide();
+        $("#all_ri").hide(); $("#fsp").show();
+        filter=$(this).val();
+        html = '<h1 class="text-center font-weight-bold">Pending Rides</h1>\
+        <table class="table table-striped table-dark">\
+    <tr class="font-weight-bold table-light text-dark"><td>Ridedate</td><td>From</td><td>To</td><td>Distance<small>(km)</small></td><td>Luggage<small>(kg)</small></td><td>Amount<small>(inr)</small></td>\
+    <td>Cab</td><td>Action</td></tr>';
+        var action = "getfilterpendride";
+        $.ajax({
+            url: "deup.php",
+            type: "post",
+            data: {
+                action: action,
+                filter: filter
+            },
+            dataType: "json",
+            success: function (result) {
+               
+                for (var i = 0; i < result.length; i++) {
+                   
+                    html += '<tr><td>' + result[i]['ridedate'] + '</td><td>' + result[i]['froml'] + '</td><td>' + result[i]['tol'] + '</td><td>'
+                        + result[i]['totaldistance'] + '</td><td>' + result[i]['luggage'] + '</td><td>'
+                        + result[i]['totalefare'] + '</td><td>' + result[i]['cab'] + '</td><td><button class="btn btn-outline-danger pl-3 delr" \
+                        data-id='+ result[i]['rideid'] + '><i class="fa fa-trash" aria-hidden="true"></i></button></td></tr>';
+                }
+                html += '</table>';
+                $("#pnd_ri").html(html);
+            }
+        });
+    });
+
         // ---------------------------------------------End ride details----------------------------------------
 
       

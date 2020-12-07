@@ -13,7 +13,7 @@ $userid=$_SESSION['userdata']['id'];
 $obj=new User();
 $out=$obj->get($userid, $data);
 ?>
-<!-- filter -->
+<!-- all ride filter -->
 <section id="fs">
 <div class="row">
 <div class="col-sm-2 text-right">
@@ -31,7 +31,29 @@ $out=$obj->get($userid, $data);
         </select></div>
         </div>
 </section>
-<!-- end filter -->
+<!-- end all ride filter -->
+
+<!-- pending ride filter -->
+<section id="fsp">
+<div class="row">
+<div class="col-sm-2 text-right">
+      <select class="form-control filterp" style="width:10rem">
+        <option>All ride</option>
+        <option value="weekp">Last 7 Days</option>
+        <option value="monthp">Last 30 days</option>
+        </select></div><div class="col-sm-2">
+        <select class="form-control sortp" style="width:10rem">
+        <option>sort by</option>
+        <option value="ridedatep">Ride Date</option>
+        <option value="farep">Fare</option>
+        <option value="ridedateap">Ride Date(ascending)</option>
+        <option value="fareap">Fare(ascending)</option>
+        </select></div>
+        </div>
+</section>
+<!-- end pending ride filter -->
+
+
 <!-- USER dasboard -->
 <section id="userdash">
 <div class="row  ml-5 text-dark text-center">
@@ -119,8 +141,13 @@ $out=$obj->get($userid, $data);
 $out=$obj->getuser($userid, $data);
 ?>
 <div class="row text-light">
-<div class="col-lg-4"></div>
-  <div class="col-lg-4 bg-dark mt-5 p-5 ml-5">
+<div class="col-lg-4 mt-5">
+<div class="bg-dark p-2 mt-5 w-100"></div>
+<div class="bg-dark p-2 mt-3 w-100"></div>
+<div class="bg-dark p-2 mt-5 w-100"></div>
+<div class="bg-dark p-2 mt-3 w-100"></div>
+</div>
+  <div class="col-lg-4 bg-dark mt-5 p-5 ">
   <h1 class=" text-center">Update Details</h1>
 <form action="" method="POST">
                 <p>
@@ -140,6 +167,12 @@ $out=$obj->getuser($userid, $data);
                 </p>
             </form>
             </div>
+            <div class="col-lg-4 mt-5">
+            <div class="bg-dark p-2 mt-5 w-100"></div>
+            <div class="bg-dark p-2 mt-3 w-100"></div>
+            <div class="bg-dark p-2 mt-5 w-100"></div>
+<div class="bg-dark p-2 mt-3 w-100"></div>
+            </div>
             </div>
 </section>
 <!-- end update info form -->
@@ -147,8 +180,12 @@ $out=$obj->getuser($userid, $data);
 <!-- change password form -->
 <section id="changepass">
 <div class="row text-light">
-<div class="col-lg-4"></div>
-  <div class="col-lg-4 bg-dark mt-5 p-5 ml-5">
+<div class="col-lg-4 pt-5">
+<div class="bg-dark p-2 mt-5 w-100"></div>
+            <div class="bg-dark p-2 mt-3 w-100"></div>
+            <div class="bg-dark p-2 mt-5 w-100"></div>
+           <div class="bg-dark p-2 mt-3 w-100"></div></div>
+           <div class="col-lg-4 bg-dark mt-5 p-5 ">
   <h1 class=" text-center">Update Password</h1>
 
 <form action="" method="POST">
@@ -175,6 +212,11 @@ $out=$obj->getuser($userid, $data);
                 </p>
             </form>
 </div>
+<div class="col-lg-4 pt-5">
+<div class="bg-dark p-2 mt-5 w-100" ></div>
+            <div class="bg-dark p-2 mt-3 w-100"></div>
+            <div class="bg-dark p-2 mt-5 w-100"></div>
+<div class="bg-dark p-2 mt-3 w-100"></div></div>
 </div>
 </section>
 <!-- end change password form -->

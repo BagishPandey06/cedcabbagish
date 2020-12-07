@@ -807,7 +807,14 @@ $(document).ready(function () {
         $("#homeadmin").show();
         var x = confirm("Are you sure you want to Edit location?");
   if (x){
-        html='<form method="post">';
+        html=' <div class="container">\
+        <div class="row text-light">\
+        <div class="col-sm-3">\
+        <div class="bg-dark p-2 mt-5 w-100"></div>\
+                    <div class="bg-dark p-2 mt-3 w-100"></div>\
+                    <div class="bg-dark p-2 mt-5 w-100"></div>\
+                   <div class="bg-dark p-2 mt-3 w-100"></div></div>\
+        <div class="col-sm-5 bg-dark border-top border-bottom rounded border-primary  p-5 "><form method="post"><h1 class="text-center mb-3">Edit-Location</h1>';
         var id = $(this).data('id');
         var action = "editloc";
         $.ajax({
@@ -826,7 +833,7 @@ $(document).ready(function () {
                         } else {
                             avilable=' <option value="1" selected>Avilable</option><option value="0" >Not-avilable</option>';
                             }
-                    html += ' <div class="form-group">\
+                    html += '<div class="form-group">\
                       <label for="exampleInputEmail1" class="font-wegiht-bold">LOCATION NAME</label>\
                       <input type="text" class="form-control"  id="locatione" value="'+result[i]['name']+'">\
                     </div>\
@@ -837,9 +844,15 @@ $(document).ready(function () {
                     <div class="form-group">\
                       <label for="avilabilty" class="font-wegiht-bold">service avilable</label>\
                       <select class="form-control" id="avilablee" >"'+avilable+'"</select></div\
-                      ><input type="button" class="btn btn-primary uploc" data-id='+ result[i]['id'] + ' value="update">';
+                      ><input type="button" class="btn btn-outline-primary w-100 uploc" data-id='+ result[i]['id'] + ' value="update">';
                 }
-                html += '</form>';
+                html += '</form></div>\
+                <div class="col-sm-4">\
+<div class="bg-dark p-2 mt-5 w-100"></div>\
+      <div class="bg-dark p-2 mt-3 w-100"></div>\
+      <div class="bg-dark p-2 mt-5 w-100"></div>\
+     <div class="bg-dark p-2 mt-3 w-100"></div></div>\
+                </div>';
                 $("#homeadmin").html(html);
             }
         });} else {

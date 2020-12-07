@@ -193,6 +193,84 @@
             return json_encode($rows);
         }
     }
+    public function getfilterpendridew($userid, $data)
+    {
+        $sql = "SELECT * FROM ride where`userid`='$userid' and  `status`=0 and `ridedate` > DATE_SUB(NOW(),INTERVAL 7 DAY) ORDER BY `ridedate`";
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            while ($row=$res->fetch_assoc()) {
+                $this->rows[]=$row;
+            }
+            return json_encode($this->rows);
+        }
+       
+    }
+    public function getfilterpendridem($userid, $data)
+    {
+            $sql="SELECT *FROM ride Where `userid`='$userid' and `status`=0 and `ridedate` > DATE_SUB(NOW(),INTERVAL 30 DAY) ORDER BY `ridedate`";
+
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            while ($row=$res->fetch_assoc()) {
+                $this->rows[]=$row;
+            }
+            return json_encode($this->rows);
+        }
+
+    }
+    public function getpendsortd($userid, $data)
+    {
+        
+        $sql="SELECT *FROM ride Where  `status`=0 and `userid`='$userid'order by DATE(`ridedate`) desc";
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            while ($row=$res->fetch_assoc()) {
+                $this->rows[]=$row;
+            }
+            return json_encode($this->rows);
+        }
+
+    }
+    public function getpendsortf($userid, $data)
+    {
+        
+        $sql="SELECT * FROM ride Where  `status`=0 and`userid`='$userid' ORDER BY `totalefare` DESC";
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            while ($row=$res->fetch_assoc()) {
+                $this->rows[]=$row;
+            }
+            return json_encode($this->rows);
+        }
+
+    }
+
+    public function getpendsortra($userid, $data)
+    {
+        
+        $sql="SELECT *FROM ride Where  `status`=0 and`userid`='$userid' order by DATE(`ridedate`) ASC";
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            while ($row=$res->fetch_assoc()) {
+                $this->rows[]=$row;
+            }
+            return json_encode($this->rows);
+        }
+
+    }
+    public function getpendsortfa($userid, $data)
+    {
+        
+        $sql="SELECT * FROM ride Where  `status`=0 and`userid`='$userid' ORDER BY `totalefare` ASC";
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            while ($row=$res->fetch_assoc()) {
+                $this->rows[]=$row;
+            }
+            return json_encode($this->rows);
+        }
+
+    }
     public function delr($id, $data) 
     {
         $sql ="DELETE FROM ride WHERE `rideid`=$id";

@@ -31,6 +31,34 @@ case 'pndri':
      print_r($out);
      // echo "hua ro"; 
     break;
+case 'getfilterpendride':
+     
+     $filter=$_POST['filter'];
+    if ($filter=='weekp') {
+        $out=$obj->getfilterpendridew($userid, $data);
+    } elseif ($filter=='monthp') {
+        $out=$obj->getfilterpendridem($userid, $data);
+    } else {
+        $out=$obj->pndri($userid, $data);
+    
+    }
+
+     print_r($out);
+    break;
+case 'getsortpendride':
+     $sort=$_POST['sort'];
+    if ($sort=='ridedatep') {
+         $out=$obj->getpendsortd($userid, $data);
+    } elseif ($sort=='farep') {
+         $out=$obj->getpendsortf($userid, $data);
+    } elseif ($sort=='ridedateap') {
+         $out=$obj->getpendsortra($userid, $data);
+    } elseif ($sort=='fareap') {
+         $out=$obj->getpendsortfa($userid, $data);
+    } 
+     
+     print_r($out);
+    break;
 case 'delride':
      $id=$_POST['id'];
      $out=$obj->delr($id, $data);
@@ -71,7 +99,7 @@ case 'getsortride':
     } 
      
      print_r($out);
-     break;
+    break;
 case 'canc':
      $out=$obj->can($userid, $data);
      print_r($out);
